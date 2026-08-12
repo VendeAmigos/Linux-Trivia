@@ -178,6 +178,18 @@ body {
 .game-logo {
   font-size: 2rem;
   margin-bottom: var(--space-md);
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sprite-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.5));
 }
 
 .game-title {
@@ -447,6 +459,11 @@ body {
   font-size: 4rem;
   filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.3));
   line-height: 1;
+  width: 95px;
+  height: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .character-name {
@@ -867,6 +884,11 @@ body {
 .round-overlay .enemy-intro-sprite {
   font-size: 5rem;
   margin-top: var(--space-lg);
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ============================================

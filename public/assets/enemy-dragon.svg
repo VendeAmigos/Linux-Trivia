@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="100%" height="100%">
+  <defs>
+    <filter id="dragonGlow">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#f97316" flood-opacity="0.9"/>
+    </filter>
+    <linearGradient id="fireGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="50%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+  <!-- Wings -->
+  <path d="M 50,45 Q 10,10 0,40 Q 25,50 35,65 Z" fill="#b91c1c" stroke="#7f1d1d" stroke-width="3"/>
+  <path d="M 90,45 Q 130,10 140,40 Q 115,50 105,65 Z" fill="#b91c1c" stroke="#7f1d1d" stroke-width="3"/>
+  <!-- Server Rack Body -->
+  <rect x="42" y="60" width="56" height="60" rx="6" fill="#1e1e38" stroke="#f97316" stroke-width="4" filter="url(#dragonGlow)"/>
+  <!-- Server LEDs & Slots -->
+  <rect x="48" y="68" width="44" height="8" rx="2" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+  <circle cx="53" cy="72" r="2" fill="#22c55e"/>
+  <circle cx="59" cy="72" r="2" fill="#38bdf8"/>
+  <rect x="48" y="80" width="44" height="8" rx="2" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+  <circle cx="53" cy="84" r="2" fill="#ef4444"/>
+  <circle cx="59" cy="84" r="2" fill="#f59e0b"/>
+  <rect x="48" y="92" width="44" height="8" rx="2" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+  <circle cx="53" cy="96" r="2" fill="#22c55e"/>
+  <circle cx="59" cy="96" r="2" fill="#a855f7"/>
+  <!-- Dragon Head -->
+  <path d="M 45,35 L 70,10 L 95,35 L 90,55 L 50,55 Z" fill="#dc2626" stroke="#991b1b" stroke-width="3"/>
+  <!-- Horns -->
+  <path d="M 50,30 L 35,10 L 52,22 Z" fill="#fbbf24"/>
+  <path d="M 90,30 L 105,10 L 88,22 Z" fill="#fbbf24"/>
+  <!-- Eyes -->
+  <polygon points="54,34 64,34 59,42" fill="#fbbf24"/>
+  <polygon points="76,34 86,34 81,42" fill="#fbbf24"/>
+  <!-- Fire Breath from Mouth -->
+  <path d="M 55,50 Q 70,60 70,85 Q 50,75 55,50 Z" fill="url(#fireGrad)"/>
+  <path d="M 60,52 Q 10,75 0,95 Q 35,80 60,52 Z" fill="url(#fireGrad)" filter="url(#dragonGlow)"/>
+  <!-- Claws -->
+  <path d="M 35,115 L 45,120 L 40,130 Z" fill="#fbbf24"/>
+  <path d="M 105,115 L 95,120 L 100,130 Z" fill="#fbbf24"/>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Shield outline -->
+  <polygon points="100,15 170,45 170,120 100,185 30,120 30,45" fill="#12122a" stroke="url(#logoGrad)" stroke-width="8" filter="url(#glow)"/>
+  <polygon points="100,28 158,53 158,115 100,170 42,115 42,53" fill="#1a1a3e" stroke="#a855f7" stroke-width="3"/>
+  <!-- Crossed Swords 8-bit style -->
+  <path d="M 60,60 L 140,140 M 140,60 L 60,140" stroke="#fbbf24" stroke-width="8" stroke-linecap="square" />
+  <path d="M 50,50 L 60,60 M 150,50 L 140,60 M 50,150 L 60,140 M 150,150 L 140,140" stroke="#ef4444" stroke-width="10" stroke-linecap="square" />
+  <!-- Center Penguin Tux Helmet Silhouette -->
+  <circle cx="100" cy="95" r="28" fill="#0f172a" stroke="#22d3ee" stroke-width="4"/>
+  <!-- Eyes -->
+  <rect x="88" y="85" width="8" height="12" rx="4" fill="#ffffff" />
+  <rect x="104" y="85" width="8" height="12" rx="4" fill="#ffffff" />
+  <rect x="91" y="90" width="4" height="6" rx="2" fill="#0f172a" />
+  <rect x="105" y="90" width="4" height="6" rx="2" fill="#0f172a" />
+  <!-- Beak -->
+  <polygon points="92,99 108,99 100,112" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+  <!-- Star crown -->
+  <polygon points="100,50 104,60 114,60 106,66 109,76 100,70 91,76 94,66 86,60 96,60" fill="#fbbf24"/>
+</svg>

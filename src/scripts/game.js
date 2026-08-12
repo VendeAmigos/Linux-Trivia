@@ -37,12 +37,12 @@ import {
 // ENEMY DEFINITIONS
 // ============================================
 const ENEMIES = [
-  { name: 'Bug', sprite: '🐛', hp: 40, damage: 10, questionsPerRound: 2 },
-  { name: 'Malware', sprite: '🦠', hp: 55, damage: 12, questionsPerRound: 2 },
-  { name: 'Troyano', sprite: '🐴', hp: 70, damage: 15, questionsPerRound: 2 },
-  { name: 'Ransomware', sprite: '🔒💀', hp: 85, damage: 18, questionsPerRound: 2 },
-  { name: 'Hacker Oscuro', sprite: '👤💻', hp: 100, damage: 20, questionsPerRound: 3 },
-  { name: 'Dragón del Servidor', sprite: '🐉🖥️', hp: 150, damage: 25, questionsPerRound: 4 },
+  { name: 'Bug', sprite: '/assets/enemy-bug.svg', emoji: '🐛', hp: 40, damage: 10, questionsPerRound: 2 },
+  { name: 'Malware', sprite: '/assets/enemy-malware.svg', emoji: '🦠', hp: 55, damage: 12, questionsPerRound: 2 },
+  { name: 'Troyano', sprite: '/assets/enemy-trojan.svg', emoji: '🐴', hp: 70, damage: 15, questionsPerRound: 2 },
+  { name: 'Ransomware', sprite: '/assets/enemy-ransomware.svg', emoji: '🔒💀', hp: 85, damage: 18, questionsPerRound: 2 },
+  { name: 'Hacker Oscuro', sprite: '/assets/enemy-hacker.svg', emoji: '👤💻', hp: 100, damage: 20, questionsPerRound: 3 },
+  { name: 'Dragón del Servidor', sprite: '/assets/enemy-dragon.svg', emoji: '🐉🖥️', hp: 150, damage: 25, questionsPerRound: 4 },
 ];
 
 const DIFFICULTY_MULTIPLIERS = {
@@ -156,6 +156,16 @@ const btnBackToTitle = $('btn-back-to-title');
 // Sound toggle
 const soundToggle = $('sound-toggle');
 
+// Helper to render SVG sprites or emojis cleanly
+function renderSprite(containerEl, spritePath, defaultEmoji = '👾') {
+  if (!containerEl) return;
+  if (spritePath && (spritePath.endsWith('.svg') || spritePath.startsWith('/'))) {
+    containerEl.innerHTML = `<img src="${spritePath}" alt="sprite" class="sprite-svg" />`;
+  } else {
+    containerEl.textContent = spritePath || defaultEmoji;
+  }
+}
+
 // ============================================
 // INITIALIZATION
 // ============================================
@@ -163,6 +173,18 @@ function init() {
   createStarfield();
   setupEventListeners();
   animateTitleScreen();
+  renderSprite(playerSprite, '/assets/player.svg', '🧙‍♂️');
+  const logoEl = document.querySelector('.game-logo');
+  if (logoEl) renderSprite(logoEl, '/assets/logo.svg', '🐧⚔️🐉');
+
+  // Start background music on user interaction
+  const startBGMOnInteraction = () => {
+    Sounds.playBGM('title');
+    document.removeEventListener('click', startBGMOnInteraction);
+    document.removeEventListener('keydown', startBGMOnInteraction);
+  };
+  document.addEventListener('click', startBGMOnInteraction);
+  document.addEventListener('keydown', startBGMOnInteraction);
 }
 
 function createStarfield() {
@@ -262,11 +284,13 @@ function setupEventListeners() {
     Sounds.click();
     showScreen(screenTitle);
     animateTitleScreen();
+    Sounds.playBGM('title');
   });
 
   // Sound toggle
   soundToggle.addEventListener('click', () => {
     state.soundEnabled = !state.soundEnabled;
+    Sounds.setSoundEnabled(state.soundEnabled);
     soundToggle.textContent = state.soundEnabled ? '🔊' : '🔇';
   });
 }
@@ -312,11 +336,15 @@ function startGame() {
 function startRound() {
   const enemy = ENEMIES[state.currentRound];
   const mult = DIFFICULTY_MULTIPLIERS[state.difficulty];
+  const isBoss = state.currentRound === ENEMIES.length - 1;
 
   state.currentEnemy = enemy;
   state.currentEnemyMaxHP = Math.round(enemy.hp * mult.enemyHp);
   state.currentEnemyHP = state.currentEnemyMaxHP;
   state.roundQuestionIndex = 0;
+
+  // Start BGM: Boss theme for last round, Battle theme otherwise
+  Sounds.playBGM(isBoss ? 'boss' : 'battle');
 
   // Kill previous idle animation
   if (state.enemyIdleAnim) {
@@ -337,7 +365,7 @@ function showRoundOverlay(enemy, onComplete) {
 
   roundText.textContent = isBoss ? '⚠️ JEFE FINAL ⚠️' : `Ronda ${state.currentRound + 1}`;
   enemyIntroName.textContent = `¡${enemy.name} aparece!`;
-  enemyIntroSprite.textContent = enemy.sprite;
+  renderSprite(enemyIntroSprite, enemy.sprite, enemy.emoji);
 
   roundOverlay.classList.add('active');
 
@@ -377,7 +405,7 @@ function showRoundOverlay(enemy, onComplete) {
 }
 
 function setupEnemy(enemy) {
-  enemySprite.textContent = enemy.sprite;
+  renderSprite(enemySprite, enemy.sprite, enemy.emoji);
   enemyNameEl.textContent = enemy.name;
 
   // Enemy entrance animation
@@ -434,9 +462,13 @@ function showQuestion() {
   questionCategory.textContent = q.category;
   questionText.textContent = q.question;
 
+  // Fully reset button styles, animations and classes for the new question
   answerBtns.forEach((btn, i) => {
+    gsap.killTweensOf(btn);
+    gsap.set(btn, { clearProps: 'all' });
+    btn.removeAttribute('style');
     const textSpan = btn.querySelector('.answer-text');
-    textSpan.textContent = q.options[i];
+    if (textSpan) textSpan.textContent = q.options[i];
     btn.disabled = false;
     btn.className = 'answer-btn';
   });
@@ -449,6 +481,7 @@ function showQuestion() {
   // Start timer
   startTimer();
 }
+
 
 // ============================================
 // TIMER
@@ -769,6 +802,7 @@ function resetAndGoToTitle() {
 
   showScreen(screenTitle);
   animateTitleScreen();
+  Sounds.playBGM('title');
 }
 
 function escapeHTML(str) {
