@@ -173,24 +173,48 @@ export function playerAttack(playerEl, enemyEl, damageEl) {
 }
 
 /**
- * Enemy attack animation
+ * Enemy attack animation (Supports multi-layer SVG animations)
  */
 export function enemyAttack(enemyEl, playerEl, damageEl) {
   const tl = gsap.timeline();
 
-  // Enemy charges
+  // Find internal SVG layers (e.g. for Trojan enemy)
+  const cabeza = enemyEl.querySelector('#cabeza');
+  const crazo = enemyEl.querySelector('#crazo');
+  const manoDerecha = enemyEl.querySelector('#mano_derecha');
+  const ataque = enemyEl.querySelector('#ataque');
+
+  // Step 1: Wind-up (pull back arm & tilt head)
+  if (crazo) tl.to(crazo, { rotation: -30, transformOrigin: '625px 590px', duration: 0.15, ease: 'power2.in' }, 0);
+  if (cabeza) tl.to(cabeza, { y: 15, rotation: -10, duration: 0.15, ease: 'power2.in' }, 0);
+
+  // Step 2: Charge forward
   tl.to(enemyEl, {
-    x: -50,
+    x: -55,
     scale: 1.15,
     duration: 0.2,
     ease: 'power3.in'
   });
 
+  // Step 3: Slash / Strike & show attack energy effect
+  if (crazo) tl.to(crazo, { rotation: 45, transformOrigin: '625px 590px', duration: 0.15, ease: 'power3.out' }, '<');
+  if (manoDerecha) tl.to(manoDerecha, { x: -25, duration: 0.15 }, '<');
+  if (cabeza) tl.to(cabeza, { y: -10, rotation: 12, duration: 0.15 }, '<');
+
+  if (ataque) {
+    tl.fromTo(ataque,
+      { opacity: 0, scale: 0.3, rotation: -45, transformOrigin: 'center center' },
+      { opacity: 1, scale: 1.4, rotation: 45, duration: 0.25, ease: 'back.out(2)' },
+      '<'
+    );
+    tl.to(ataque, { opacity: 0, scale: 1.6, duration: 0.2 });
+  }
+
   // Screen flash red
   tl.to('.game-battle-area', {
     backgroundColor: 'rgba(255, 0, 0, 0.15)',
     duration: 0.05
-  });
+  }, '<');
 
   // Heavy screen shake
   tl.to('.game-battle-area', {
@@ -221,9 +245,12 @@ export function enemyAttack(enemyEl, playerEl, damageEl) {
     );
   }
 
-  // Reset
+  // Reset positions
   tl.to('.game-battle-area', { backgroundColor: 'transparent', duration: 0.3 }, '-=0.5');
   tl.to(enemyEl, { x: 0, scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.5)' }, '-=0.3');
+  if (crazo) tl.to(crazo, { rotation: 0, duration: 0.3 }, '<');
+  if (manoDerecha) tl.to(manoDerecha, { x: 0, duration: 0.3 }, '<');
+  if (cabeza) tl.to(cabeza, { y: 0, rotation: 0, duration: 0.3 }, '<');
   tl.to(playerEl, { x: 0, filter: 'brightness(1) hue-rotate(0deg)', duration: 0.3, ease: 'power2.out' }, '<');
   tl.to('.game-battle-area', { x: 0, duration: 0.1 }, '<');
 
@@ -308,9 +335,41 @@ export function enemyEntrance(enemyEl) {
 }
 
 /**
- * Enemy idle breathing animation
+ * Enemy idle breathing animation (Supports multi-layer SVG animations)
  */
 export function enemyIdle(enemyEl) {
+  const tl = gsap.timeline({ repeat: -1, yoyo: true });
+
+  const cabeza = enemyEl.querySelector('#cabeza');
+  const crazo = enemyEl.querySelector('#crazo');
+  const brazoIzquierdo = enemyEl.querySelector('#brazo_izquierdo');
+  const cuello = enemyEl.querySelector('#cuello');
+  const ataque = enemyEl.querySelector('#ataque');
+
+  // Hide attack effect during idle
+  if (ataque) {
+    gsap.set(ataque, { opacity: 0 });
+  }
+
+  // If internal SVG layers exist (e.g. Trojan enemy)
+  if (cabeza || crazo || brazoIzquierdo) {
+    if (cabeza) {
+      tl.to(cabeza, { y: -8, rotation: 3, transformOrigin: '50% 100%', duration: 1.2, ease: 'sine.inOut' }, 0);
+    }
+    if (crazo) {
+      tl.to(crazo, { rotation: 6, transformOrigin: '625px 590px', duration: 1.4, ease: 'sine.inOut' }, 0);
+    }
+    if (brazoIzquierdo) {
+      tl.to(brazoIzquierdo, { rotation: -5, transformOrigin: '428px 627px', duration: 1.3, ease: 'sine.inOut' }, 0);
+    }
+    if (cuello) {
+      tl.to(cuello, { scaleY: 1.04, transformOrigin: '50% 100%', duration: 1.2, ease: 'sine.inOut' }, 0);
+    }
+    tl.to(enemyEl, { scaleY: 1.02, scaleX: 0.98, duration: 1.2, ease: 'sine.inOut' }, 0);
+    return tl;
+  }
+
+  // Default idle animation
   return gsap.to(enemyEl, {
     scaleY: 1.03,
     scaleX: 0.97,

@@ -156,10 +156,35 @@ const btnBackToTitle = $('btn-back-to-title');
 // Sound toggle
 const soundToggle = $('sound-toggle');
 
-// Helper to render SVG sprites or emojis cleanly
-function renderSprite(containerEl, spritePath, defaultEmoji = '👾') {
+// Cache for inlined SVG files
+const svgCache = new Map();
+
+// Helper to render SVG sprites or emojis cleanly (inlining SVGs for layer animations)
+async function renderSprite(containerEl, spritePath, defaultEmoji = '👾') {
   if (!containerEl) return;
   if (spritePath && (spritePath.endsWith('.svg') || spritePath.startsWith('/'))) {
+    try {
+      let svgText = '';
+      if (svgCache.has(spritePath)) {
+        svgText = svgCache.get(spritePath);
+      } else {
+        const res = await fetch(spritePath);
+        if (res.ok) {
+          svgText = await res.text();
+          svgCache.set(spritePath, svgText);
+        }
+      }
+      if (svgText) {
+        containerEl.innerHTML = svgText;
+        const svgEl = containerEl.querySelector('svg');
+        if (svgEl) {
+          svgEl.classList.add('sprite-svg');
+        }
+        return;
+      }
+    } catch (e) {
+      // Fallback to img if fetch fails
+    }
     containerEl.innerHTML = `<img src="${spritePath}" alt="sprite" class="sprite-svg" />`;
   } else {
     containerEl.textContent = spritePath || defaultEmoji;
