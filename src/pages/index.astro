@@ -79,12 +79,14 @@ import Layout from '../layouts/Layout.astro';
       <div class="game-battle-area" id="battle-area">
         <!-- Player -->
         <div class="character" id="player-character">
-          <div class="character-sprite" id="player-sprite">🧙‍♂️</div>
-          <div class="character-name" id="player-display-name">Héroe</div>
-          <div class="hp-bar-container">
-            <div class="hp-bar-fill" id="player-hp-bar" style="width: 100%"></div>
-            <div class="hp-text" id="player-hp-text">100/100</div>
+          <div class="character-header">
+            <div class="character-name" id="player-display-name">Héroe</div>
+            <div class="hp-bar-container">
+              <div class="hp-bar-fill" id="player-hp-bar" style="width: 100%"></div>
+              <div class="hp-text" id="player-hp-text">100/100</div>
+            </div>
           </div>
+          <div class="character-sprite" id="player-sprite">🧙‍♂️</div>
           <div class="damage-number" id="player-damage">-0</div>
         </div>
 
@@ -96,12 +98,14 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- Enemy -->
         <div class="character" id="enemy-character">
-          <div class="character-sprite" id="enemy-sprite">🟢</div>
-          <div class="character-name" id="enemy-name">Slime</div>
-          <div class="hp-bar-container">
-            <div class="hp-bar-fill" id="enemy-hp-bar" style="width: 100%"></div>
-            <div class="hp-text" id="enemy-hp-text">50/50</div>
+          <div class="character-header">
+            <div class="character-name" id="enemy-name">Slime</div>
+            <div class="hp-bar-container">
+              <div class="hp-bar-fill" id="enemy-hp-bar" style="width: 100%"></div>
+              <div class="hp-text" id="enemy-hp-text">50/50</div>
+            </div>
           </div>
+          <div class="character-sprite" id="enemy-sprite">🟢</div>
           <div class="damage-number" id="enemy-damage">-0</div>
         </div>
       </div>

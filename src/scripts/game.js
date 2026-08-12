@@ -37,9 +37,9 @@ import {
 // ENEMY DEFINITIONS
 // ============================================
 const ENEMIES = [
-  { name: 'Bug', sprite: '/assets/enemy-bug.svg', emoji: '🐛', hp: 40, damage: 10, questionsPerRound: 2 },
-  { name: 'Malware', sprite: '/assets/enemy-malware.svg', emoji: '🦠', hp: 55, damage: 12, questionsPerRound: 2 },
-  { name: 'Troyano', sprite: '/assets/enemy-trojan.svg', emoji: '🐴', hp: 70, damage: 15, questionsPerRound: 2 },
+  { name: 'Troyano', sprite: '/assets/enemy-trojan.svg', emoji: '🐴', hp: 40, damage: 10, questionsPerRound: 2 },
+  { name: 'Bug', sprite: '/assets/enemy-bug.svg', emoji: '🐛', hp: 55, damage: 12, questionsPerRound: 2 },
+  { name: 'Malware', sprite: '/assets/enemy-malware.svg', emoji: '🦠', hp: 70, damage: 15, questionsPerRound: 2 },
   { name: 'Ransomware', sprite: '/assets/enemy-ransomware.svg', emoji: '🔒💀', hp: 85, damage: 18, questionsPerRound: 2 },
   { name: 'Hacker Oscuro', sprite: '/assets/enemy-hacker.svg', emoji: '👤💻', hp: 100, damage: 20, questionsPerRound: 3 },
   { name: 'Dragón del Servidor', sprite: '/assets/enemy-dragon.svg', emoji: '🐉🖥️', hp: 150, damage: 25, questionsPerRound: 4 },
@@ -179,6 +179,8 @@ async function renderSprite(containerEl, spritePath, defaultEmoji = '👾') {
         const svgEl = containerEl.querySelector('svg');
         if (svgEl) {
           svgEl.classList.add('sprite-svg');
+          svgEl.style.overflow = 'visible';
+          svgEl.setAttribute('overflow', 'visible');
         }
         return;
       }
@@ -390,6 +392,9 @@ function showRoundOverlay(enemy, onComplete) {
 
   roundText.textContent = isBoss ? '⚠️ JEFE FINAL ⚠️' : `Ronda ${state.currentRound + 1}`;
   enemyIntroName.textContent = `¡${enemy.name} aparece!`;
+  gsap.killTweensOf(enemyIntroSprite);
+  gsap.set(enemyIntroSprite, { clearProps: 'all' });
+  enemyIntroSprite.removeAttribute('style');
   renderSprite(enemyIntroSprite, enemy.sprite, enemy.emoji);
 
   roundOverlay.classList.add('active');
@@ -429,8 +434,18 @@ function showRoundOverlay(enemy, onComplete) {
   });
 }
 
-function setupEnemy(enemy) {
-  renderSprite(enemySprite, enemy.sprite, enemy.emoji);
+async function setupEnemy(enemy) {
+  if (state.enemyIdleAnim) {
+    state.enemyIdleAnim.kill();
+    state.enemyIdleAnim = null;
+  }
+
+  // Clear GSAP properties and styles left on enemySprite from previous death animation
+  gsap.killTweensOf(enemySprite);
+  gsap.set(enemySprite, { clearProps: 'all' });
+  enemySprite.removeAttribute('style');
+
+  await renderSprite(enemySprite, enemy.sprite, enemy.emoji);
   enemyNameEl.textContent = enemy.name;
 
   // Enemy entrance animation

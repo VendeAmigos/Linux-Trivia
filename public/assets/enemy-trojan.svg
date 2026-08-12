@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000">
+<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000" overflow="visible" style="overflow: visible !important;">
+  <style>
+    /* High-contrast Dark Cyber Trojan Armor Styling */
+    svg, #Capa_1, g, image, polygon, circle, ellipse, rect {
+      overflow: visible !important;
+    }
+    #Capa_1 polygon, #Capa_1 circle, #Capa_1 ellipse, #Capa_1 rect {
+      fill: #3b0764;
+      stroke: #c084fc;
+      stroke-width: 5px;
+      stroke-linejoin: round;
+    }
+    #bicep, #ante_brazo {
+      fill: #581c87 !important;
+      stroke: #e879f9 !important;
+      stroke-width: 6px !important;
+    }
+    #articulacion_hiombro, #articulacion_codo, #articulacion_hombro_izquierdo, #ariculacion_hcodo_izquierdo {
+      fill: #ef4444 !important;
+      stroke: #fca5a5 !important;
+      stroke-width: 6px !important;
+    }
+    #mano polygon, #mano_derecha rect {
+      fill: #6b21a8 !important;
+      stroke: #ef4444 !important;
+      stroke-width: 4px !important;
+    }
+    #cuello {
+      fill: #1e1b4b !important;
+      stroke: #818cf8 !important;
+      stroke-width: 5px !important;
+    }
+    #ataque {
+      filter: drop-shadow(0 0 20px #ef4444) drop-shadow(0 0 30px #f97316);
+    }
+    #cabeza {
+      filter: drop-shadow(0 0 20px #a855f7) drop-shadow(0 0 30px #38bdf8);
+    }
+  </style>
   <g id="crazo">
     <circle id="articulacion_hiombro" data-name="articulacion hiombro" cx="625.42" cy="590.51" r="62.3"/>
     <circle id="articulacion_codo" data-name="articulacion codo" cx="829.25" cy="686.39" r="38.44"/>

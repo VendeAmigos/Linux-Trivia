@@ -173,50 +173,119 @@ export function playerAttack(playerEl, enemyEl, damageEl) {
 }
 
 /**
- * Enemy attack animation (Supports multi-layer SVG animations)
+ * Enemy attack animation (Launches #ataque red energy sphere at player for custom monsters)
  */
 export function enemyAttack(enemyEl, playerEl, damageEl) {
   const tl = gsap.timeline();
 
   // Find internal SVG layers (e.g. for Trojan enemy)
-  const cabeza = enemyEl.querySelector('#cabeza');
   const crazo = enemyEl.querySelector('#crazo');
+  const brazoIzquierdo = enemyEl.querySelector('#brazo_izquierdo');
   const manoDerecha = enemyEl.querySelector('#mano_derecha');
   const ataque = enemyEl.querySelector('#ataque');
 
-  // Step 1: Wind-up (pull back arm & tilt head)
-  if (crazo) tl.to(crazo, { rotation: -30, transformOrigin: '625px 590px', duration: 0.15, ease: 'power2.in' }, 0);
-  if (cabeza) tl.to(cabeza, { y: 15, rotation: -10, duration: 0.15, ease: 'power2.in' }, 0);
+  if (ataque) {
+    // ============================================
+    // LAUNCH RED SPHERE PROJECTILE (#ataque)
+    // ============================================
+    // Step 1: Wind-up & Charge Energy in the Sphere above hands
+    if (crazo) tl.to(crazo, { rotation: -35, transformOrigin: '625px 590px', duration: 0.15, ease: 'power2.in' }, 0);
+    if (brazoIzquierdo) tl.to(brazoIzquierdo, { rotation: 25, transformOrigin: '428px 627px', duration: 0.15, ease: 'power2.in' }, 0);
 
-  // Step 2: Charge forward
+    tl.fromTo(ataque,
+      { opacity: 1, scale: 1, x: 0, y: 0, rotation: 0, transformOrigin: 'center center' },
+      { opacity: 1, scale: 1.4, rotation: 180, duration: 0.15, ease: 'power2.out' },
+      0
+    );
+
+    // Step 2: Throw arms forward & LAUNCH RED SPHERE at player!
+    if (crazo) tl.to(crazo, { rotation: 45, transformOrigin: '625px 590px', duration: 0.2, ease: 'power3.out' });
+    if (brazoIzquierdo) tl.to(brazoIzquierdo, { rotation: -30, transformOrigin: '428px 627px', duration: 0.2, ease: 'power3.out' }, '<');
+    if (manoDerecha) tl.to(manoDerecha, { x: -20, duration: 0.2 }, '<');
+
+    tl.to(ataque, {
+      x: -450,
+      y: 40,
+      rotation: 720,
+      scale: 1.7,
+      duration: 0.35,
+      ease: 'power2.in'
+    }, '<');
+
+    // Step 3: Sphere Explosion on Player Impact
+    tl.to(ataque, {
+      opacity: 0,
+      scale: 2.8,
+      duration: 0.15,
+      ease: 'power1.out'
+    });
+
+    // Screen flash red & heavy shake
+    tl.to('.game-battle-area', {
+      backgroundColor: 'rgba(255, 0, 0, 0.2)',
+      duration: 0.05
+    }, '<');
+
+    tl.to('.game-battle-area', {
+      x: -15,
+      duration: 0.04,
+      repeat: 7,
+      yoyo: true,
+      ease: 'none'
+    }, '<');
+
+    // Player hit reaction
+    tl.to(playerEl, {
+      x: -30,
+      filter: 'brightness(2.5) hue-rotate(340deg)',
+      duration: 0.1,
+      ease: 'power2.out'
+    }, '<');
+
+    // Show damage number
+    if (damageEl) {
+      tl.fromTo(damageEl,
+        { opacity: 0, y: 0, scale: 0.5 },
+        { opacity: 1, y: -40, scale: 1.3, duration: 0.4, ease: 'back.out(2)' },
+        '<'
+      );
+      tl.to(damageEl,
+        { opacity: 0, y: -80, duration: 0.5, ease: 'power2.in' }
+      );
+    }
+
+    // Step 4: Reset Sphere back to hands (opacity: 1) & Monster Posture
+    tl.to('.game-battle-area', { backgroundColor: 'transparent', duration: 0.3 }, '-=0.4');
+    tl.set(ataque, { x: 0, y: 0, scale: 1, opacity: 1, rotation: 0 });
+    if (crazo) tl.to(crazo, { rotation: 0, duration: 0.3 }, '<');
+    if (brazoIzquierdo) tl.to(brazoIzquierdo, { rotation: 0, duration: 0.3 }, '<');
+    if (manoDerecha) tl.to(manoDerecha, { x: 0, duration: 0.3 }, '<');
+    tl.to(playerEl, { x: 0, filter: 'brightness(1) hue-rotate(0deg)', duration: 0.3, ease: 'power2.out' }, '<');
+    tl.to('.game-battle-area', { x: 0, duration: 0.1 }, '<');
+
+    return tl;
+  }
+
+  // Fallback animation for monsters without #ataque layer
+  if (crazo) tl.to(crazo, { rotation: -35, transformOrigin: '625px 590px', duration: 0.15, ease: 'power2.in' }, 0);
+  if (brazoIzquierdo) tl.to(brazoIzquierdo, { rotation: 20, transformOrigin: '428px 627px', duration: 0.15, ease: 'power2.in' }, 0);
+
   tl.to(enemyEl, {
-    x: -55,
+    x: -60,
     scale: 1.15,
     duration: 0.2,
     ease: 'power3.in'
   });
 
-  // Step 3: Slash / Strike & show attack energy effect
   if (crazo) tl.to(crazo, { rotation: 45, transformOrigin: '625px 590px', duration: 0.15, ease: 'power3.out' }, '<');
-  if (manoDerecha) tl.to(manoDerecha, { x: -25, duration: 0.15 }, '<');
-  if (cabeza) tl.to(cabeza, { y: -10, rotation: 12, duration: 0.15 }, '<');
+  if (brazoIzquierdo) tl.to(brazoIzquierdo, { rotation: -30, transformOrigin: '428px 627px', duration: 0.15, ease: 'power3.out' }, '<');
+  if (manoDerecha) tl.to(manoDerecha, { x: -20, duration: 0.15 }, '<');
 
-  if (ataque) {
-    tl.fromTo(ataque,
-      { opacity: 0, scale: 0.3, rotation: -45, transformOrigin: 'center center' },
-      { opacity: 1, scale: 1.4, rotation: 45, duration: 0.25, ease: 'back.out(2)' },
-      '<'
-    );
-    tl.to(ataque, { opacity: 0, scale: 1.6, duration: 0.2 });
-  }
-
-  // Screen flash red
   tl.to('.game-battle-area', {
     backgroundColor: 'rgba(255, 0, 0, 0.15)',
     duration: 0.05
   }, '<');
 
-  // Heavy screen shake
   tl.to('.game-battle-area', {
     x: -12,
     duration: 0.04,
@@ -225,15 +294,13 @@ export function enemyAttack(enemyEl, playerEl, damageEl) {
     ease: 'none'
   }, '<');
 
-  // Player hit reaction
   tl.to(playerEl, {
-    x: -20,
+    x: -25,
     filter: 'brightness(2) hue-rotate(340deg)',
     duration: 0.1,
     ease: 'power2.out'
   });
 
-  // Show damage
   if (damageEl) {
     tl.fromTo(damageEl,
       { opacity: 0, y: 0, scale: 0.5 },
@@ -245,12 +312,11 @@ export function enemyAttack(enemyEl, playerEl, damageEl) {
     );
   }
 
-  // Reset positions
   tl.to('.game-battle-area', { backgroundColor: 'transparent', duration: 0.3 }, '-=0.5');
   tl.to(enemyEl, { x: 0, scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.5)' }, '-=0.3');
   if (crazo) tl.to(crazo, { rotation: 0, duration: 0.3 }, '<');
+  if (brazoIzquierdo) tl.to(brazoIzquierdo, { rotation: 0, duration: 0.3 }, '<');
   if (manoDerecha) tl.to(manoDerecha, { x: 0, duration: 0.3 }, '<');
-  if (cabeza) tl.to(cabeza, { y: 0, rotation: 0, duration: 0.3 }, '<');
   tl.to(playerEl, { x: 0, filter: 'brightness(1) hue-rotate(0deg)', duration: 0.3, ease: 'power2.out' }, '<');
   tl.to('.game-battle-area', { x: 0, duration: 0.1 }, '<');
 
@@ -317,6 +383,13 @@ export function comboAnimation(comboEl) {
 export function enemyEntrance(enemyEl) {
   const tl = gsap.timeline();
 
+  // Clear previous tweens and styles on both container and child sprite
+  gsap.killTweensOf(enemyEl);
+  gsap.set(enemyEl, { clearProps: 'all' });
+  const sprite = enemyEl.querySelector('#enemy-sprite') || enemyEl;
+  gsap.killTweensOf(sprite);
+  gsap.set(sprite, { clearProps: 'all' });
+
   tl.fromTo(enemyEl,
     { x: 300, opacity: 0, scale: 0.5, rotate: 15 },
     { x: 0, opacity: 1, scale: 1, rotate: 0, duration: 0.8, ease: 'back.out(1.5)' }
@@ -340,22 +413,18 @@ export function enemyEntrance(enemyEl) {
 export function enemyIdle(enemyEl) {
   const tl = gsap.timeline({ repeat: -1, yoyo: true });
 
-  const cabeza = enemyEl.querySelector('#cabeza');
   const crazo = enemyEl.querySelector('#crazo');
   const brazoIzquierdo = enemyEl.querySelector('#brazo_izquierdo');
   const cuello = enemyEl.querySelector('#cuello');
   const ataque = enemyEl.querySelector('#ataque');
 
-  // Hide attack effect during idle
+  // Keep ataque layer visible as part of the full monster
   if (ataque) {
-    gsap.set(ataque, { opacity: 0 });
+    gsap.set(ataque, { opacity: 1 });
   }
 
   // If internal SVG layers exist (e.g. Trojan enemy)
-  if (cabeza || crazo || brazoIzquierdo) {
-    if (cabeza) {
-      tl.to(cabeza, { y: -8, rotation: 3, transformOrigin: '50% 100%', duration: 1.2, ease: 'sine.inOut' }, 0);
-    }
+  if (crazo || brazoIzquierdo) {
     if (crazo) {
       tl.to(crazo, { rotation: 6, transformOrigin: '625px 590px', duration: 1.4, ease: 'sine.inOut' }, 0);
     }
@@ -364,6 +433,9 @@ export function enemyIdle(enemyEl) {
     }
     if (cuello) {
       tl.to(cuello, { scaleY: 1.04, transformOrigin: '50% 100%', duration: 1.2, ease: 'sine.inOut' }, 0);
+    }
+    if (ataque) {
+      tl.to(ataque, { scale: 1.04, transformOrigin: 'center center', duration: 1.4, ease: 'sine.inOut' }, 0);
     }
     tl.to(enemyEl, { scaleY: 1.02, scaleX: 0.98, duration: 1.2, ease: 'sine.inOut' }, 0);
     return tl;
@@ -400,7 +472,13 @@ export function enemyDeath(enemyEl) {
     scale: 1.5,
     filter: 'blur(10px) brightness(3)',
     duration: 0.8,
-    ease: 'power2.in'
+    ease: 'power2.in',
+    onComplete: () => {
+      // Clear properties on completion so next enemy won't inherit opacity: 0
+      gsap.set(enemyEl, { clearProps: 'all' });
+      const sprite = enemyEl.querySelector('#enemy-sprite') || enemyEl;
+      gsap.set(sprite, { clearProps: 'all' });
+    }
   });
 
   return tl;
