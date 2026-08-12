@@ -1,0 +1,257 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="🐧 Linux Quest — Derrota al Dragón del Servidor">
+  <div id="game-container">
+
+    <!-- ========================================
+         SCREEN: TITLE
+         ======================================== -->
+    <section class="screen active" id="screen-title">
+      <div class="game-logo">🐧⚔️🐉</div>
+      <h1 class="game-title" id="game-title">Linux Quest</h1>
+      <p class="game-subtitle">Derrota al Dragón del Servidor</p>
+
+      <div class="title-input-group">
+        <input
+          type="text"
+          class="player-name-input"
+          id="player-name"
+          placeholder="Tu nombre, héroe..."
+          maxlength="20"
+          autocomplete="off"
+        />
+        <button class="btn btn-primary" id="btn-start">
+          ⚔️ Comenzar Aventura
+        </button>
+        <button class="btn btn-secondary" id="btn-leaderboard-view">
+          🏆 Leaderboard
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================
+         SCREEN: DIFFICULTY
+         ======================================== -->
+    <section class="screen" id="screen-difficulty">
+      <h2 class="difficulty-title">Elige tu Destino</h2>
+
+      <div class="difficulty-options">
+        <div class="difficulty-card" data-difficulty="easy" id="diff-easy">
+          <div class="difficulty-emoji">🌿</div>
+          <div class="difficulty-name">Fácil</div>
+          <div class="difficulty-desc">Para aprendices<br/>Daño x1 · Enemigos débiles</div>
+        </div>
+
+        <div class="difficulty-card" data-difficulty="normal" id="diff-normal">
+          <div class="difficulty-emoji">⚔️</div>
+          <div class="difficulty-name">Normal</div>
+          <div class="difficulty-desc">Para guerreros<br/>Daño x1.5 · Enemigos fuertes</div>
+        </div>
+
+        <div class="difficulty-card" data-difficulty="hard" id="diff-hard">
+          <div class="difficulty-emoji">💀</div>
+          <div class="difficulty-name">Difícil</div>
+          <div class="difficulty-desc">Para leyendas<br/>Daño x2 · Enemigos letales</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         SCREEN: BATTLE
+         ======================================== -->
+    <section class="screen" id="screen-battle">
+      <!-- HUD -->
+      <div class="battle-hud">
+        <div class="hud-item">
+          Ronda: <span class="hud-value" id="hud-round">1/6</span>
+        </div>
+        <div class="hud-item">
+          Puntos: <span class="hud-value" id="hud-score">0</span>
+        </div>
+        <div class="hud-item">
+          Combo: <span class="hud-value" id="hud-combo">x0</span>
+        </div>
+      </div>
+
+      <!-- Battle Arena -->
+      <div class="game-battle-area" id="battle-area">
+        <!-- Player -->
+        <div class="character" id="player-character">
+          <div class="character-sprite" id="player-sprite">🧙‍♂️</div>
+          <div class="character-name" id="player-display-name">Héroe</div>
+          <div class="hp-bar-container">
+            <div class="hp-bar-fill" id="player-hp-bar" style="width: 100%"></div>
+            <div class="hp-text" id="player-hp-text">100/100</div>
+          </div>
+          <div class="damage-number" id="player-damage">-0</div>
+        </div>
+
+        <!-- VS -->
+        <div class="vs-indicator">VS</div>
+
+        <!-- Combo Display -->
+        <div class="combo-display" id="combo-display">COMBO x2!</div>
+
+        <!-- Enemy -->
+        <div class="character" id="enemy-character">
+          <div class="character-sprite" id="enemy-sprite">🟢</div>
+          <div class="character-name" id="enemy-name">Slime</div>
+          <div class="hp-bar-container">
+            <div class="hp-bar-fill" id="enemy-hp-bar" style="width: 100%"></div>
+            <div class="hp-text" id="enemy-hp-text">50/50</div>
+          </div>
+          <div class="damage-number" id="enemy-damage">-0</div>
+        </div>
+      </div>
+
+      <!-- Timer -->
+      <div class="timer-container" id="timer-container">
+        <svg class="timer-svg" viewBox="0 0 100 100">
+          <circle class="timer-circle-bg" cx="50" cy="50" r="45" />
+          <circle class="timer-circle" id="timer-circle" cx="50" cy="50" r="45" />
+        </svg>
+        <div class="timer-text" id="timer-text">15</div>
+      </div>
+
+      <!-- Question -->
+      <div class="question-panel" id="question-panel">
+        <div class="question-category" id="question-category">Ciencia</div>
+        <div class="question-text" id="question-text">
+          ¿Pregunta aquí?
+        </div>
+      </div>
+
+      <!-- Answers -->
+      <div class="answers-grid" id="answers-grid">
+        <button class="answer-btn" id="answer-0">
+          <span class="answer-letter">A.</span>
+          <span class="answer-text">Respuesta 1</span>
+        </button>
+        <button class="answer-btn" id="answer-1">
+          <span class="answer-letter">B.</span>
+          <span class="answer-text">Respuesta 2</span>
+        </button>
+        <button class="answer-btn" id="answer-2">
+          <span class="answer-letter">C.</span>
+          <span class="answer-text">Respuesta 3</span>
+        </button>
+        <button class="answer-btn" id="answer-3">
+          <span class="answer-letter">D.</span>
+          <span class="answer-text">Respuesta 4</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================
+         SCREEN: VICTORY
+         ======================================== -->
+    <section class="screen" id="screen-victory">
+      <div class="victory-title">🏆 ¡VICTORIA!</div>
+      <p class="game-subtitle" style="margin-top: -10px;">¡Has derrotado al Dragón del Servidor!</p>
+
+      <div class="result-stats" id="victory-stats">
+        <div class="stat-item">
+          <div class="stat-label">Puntuación</div>
+          <div class="stat-value" id="victory-score">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">HP Restante</div>
+          <div class="stat-value" id="victory-hp">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Combo Máx</div>
+          <div class="stat-value" id="victory-combo">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Dificultad</div>
+          <div class="stat-value" id="victory-difficulty">Normal</div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-gold" id="btn-save-score">
+          💾 Guardar Puntaje
+        </button>
+        <button class="btn btn-primary" id="btn-play-again-win">
+          🔄 Jugar de Nuevo
+        </button>
+        <button class="btn btn-secondary" id="btn-leaderboard-win">
+          🏆 Leaderboard
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================
+         SCREEN: DEFEAT
+         ======================================== -->
+    <section class="screen" id="screen-defeat">
+      <div class="defeat-title">💀 DERROTA</div>
+      <p class="game-subtitle" style="margin-top: -10px;">El enemigo te ha vencido...</p>
+
+      <div class="result-stats" id="defeat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Puntuación</div>
+          <div class="stat-value" id="defeat-score">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Ronda Alcanzada</div>
+          <div class="stat-value" id="defeat-round">1</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Combo Máx</div>
+          <div class="stat-value" id="defeat-combo">0</div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-primary" id="btn-play-again-lose">
+          🔄 Intentar de Nuevo
+        </button>
+        <button class="btn btn-secondary" id="btn-leaderboard-lose">
+          🏆 Leaderboard
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================
+         SCREEN: LEADERBOARD
+         ======================================== -->
+    <section class="screen" id="screen-leaderboard">
+      <h2 class="leaderboard-title">🏆 Salón de la Fama</h2>
+
+      <div class="leaderboard-table" id="leaderboard-table">
+        <div class="leaderboard-header">
+          <div>#</div>
+          <div>Jugador</div>
+          <div style="text-align:right">Puntos</div>
+          <div style="text-align:right">Dificultad</div>
+        </div>
+        <div id="leaderboard-body">
+          <div class="leaderboard-empty">Cargando...</div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-primary" id="btn-back-to-title">
+          ← Volver al Inicio
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================
+         ROUND TRANSITION OVERLAY
+         ======================================== -->
+    <div class="round-overlay" id="round-overlay">
+      <div class="round-text" id="round-text">Ronda 1</div>
+      <div class="enemy-intro" id="enemy-intro-name">¡Un Slime aparece!</div>
+      <div class="enemy-intro-sprite" id="enemy-intro-sprite">🟢</div>
+    </div>
+
+  </div>
+
+  <script>
+    import '../scripts/game.js';
+  </script>
+</Layout>
