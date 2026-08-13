@@ -6,6 +6,7 @@ let audioCtx = null;
 let bgmTimer = null;
 let currentBGMTrack = null;
 let soundEnabled = true;
+let lofiFilter = null;
 
 function getAudioContext() {
   if (!audioCtx) {
@@ -20,7 +21,17 @@ function getAudioContext() {
   return audioCtx;
 }
 
-function playTone(frequency, duration, type = 'square', volume = 0.15, rampDown = true) {
+function getLofiFilter(ctx) {
+  if (!lofiFilter || lofiFilter.context !== ctx) {
+    lofiFilter = ctx.createBiquadFilter();
+    lofiFilter.type = 'lowpass';
+    lofiFilter.frequency.setValueAtTime(1100, ctx.currentTime);
+    lofiFilter.connect(ctx.destination);
+  }
+  return lofiFilter;
+}
+
+function playTone(frequency, duration, type = 'sine', volume = 0.08, rampDown = true, isLofi = false) {
   if (!soundEnabled) return;
   try {
     const ctx = getAudioContext();
@@ -30,14 +41,20 @@ function playTone(frequency, duration, type = 'square', volume = 0.15, rampDown 
 
     osc.type = type;
     osc.frequency.setValueAtTime(frequency, ctx.currentTime);
-    gain.gain.setValueAtTime(volume, ctx.currentTime);
+    gain.gain.setValueAtTime(0.001, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(volume, ctx.currentTime + 0.02);
 
     if (rampDown) {
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
     }
 
     osc.connect(gain);
-    gain.connect(ctx.destination);
+    if (isLofi) {
+      gain.connect(getLofiFilter(ctx));
+    } else {
+      gain.connect(ctx.destination);
+    }
+
     osc.start(ctx.currentTime);
     osc.stop(ctx.currentTime + duration);
   } catch (e) {
@@ -45,7 +62,7 @@ function playTone(frequency, duration, type = 'square', volume = 0.15, rampDown 
   }
 }
 
-function playNoise(duration, volume = 0.1) {
+function playNoise(duration, volume = 0.06) {
   if (!soundEnabled) return;
   try {
     const ctx = getAudioContext();
@@ -55,7 +72,7 @@ function playNoise(duration, volume = 0.1) {
     const data = buffer.getChannelData(0);
 
     for (let i = 0; i < bufferSize; i++) {
-      data[i] = (Math.random() * 2 - 1) * 0.5;
+      data[i] = (Math.random() * 2 - 1) * 0.3;
     }
 
     const source = ctx.createBufferSource();
@@ -74,52 +91,79 @@ function playNoise(duration, volume = 0.1) {
 }
 
 // ============================================
-// 8-BIT CHIPTUNE SYNTHESIZER FOR BACKGROUND MUSIC
+// CHILL LO-FI SYNTHESIZER FOR BACKGROUND MUSIC
 // ============================================
 
 // Note frequencies (Hz)
 const N = {
+  C2: 65.41, D2: 73.42, E2: 82.41, F2: 87.31, G2: 98.00, A2: 110.00, B2: 123.47,
   C3: 130.81, D3: 146.83, E3: 164.81, F3: 174.61, G3: 196.00, A3: 220.00, B3: 246.94,
   C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00, A4: 440.00, B4: 493.88,
   C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99, A5: 880.00, B5: 987.77,
+  Bb3: 233.08, Eb4: 311.13, Ab4: 415.30, Bb4: 466.16,
   OFF: 0
 };
 
-// 8-Bit Melody & Bass Patterns
+// Warm Lo-Fi Jazz Chord Tracks
 const MUSIC_TRACKS = {
   title: {
-    tempo: 160,
+    tempo: 260, // ~70 BPM chill lo-fi
     melody: [
-      { note: N.E4, dur: 0.12 }, { note: N.G4, dur: 0.12 }, { note: N.B4, dur: 0.12 }, { note: N.E5, dur: 0.2 },
-      { note: N.D5, dur: 0.12 }, { note: N.B4, dur: 0.12 }, { note: N.G4, dur: 0.12 }, { note: N.A4, dur: 0.2 },
-      { note: N.C4, dur: 0.12 }, { note: N.E4, dur: 0.12 }, { note: N.A4, dur: 0.12 }, { note: N.C5, dur: 0.2 },
-      { note: N.B4, dur: 0.12 }, { note: N.G4, dur: 0.12 }, { note: N.E4, dur: 0.12 }, { note: N.E4, dur: 0.2 }
+      { chord: [N.E4, N.G4, N.B4, N.D5], dur: 0.5 }, { chord: [N.G4, N.B4], dur: 0.3 },
+      { chord: [N.D4, N.F4, N.A4, N.C5], dur: 0.5 }, { chord: [N.F4, N.A4], dur: 0.3 },
+      { chord: [N.C4, N.E4, N.G4, N.B4], dur: 0.5 }, { chord: [N.E4, N.G4], dur: 0.3 },
+      { chord: [N.B3, N.D4, N.F4, N.A4], dur: 0.5 }, { chord: [N.D4, N.F4], dur: 0.3 }
     ],
-    bass: [N.E3, N.E3, N.A3, N.A3, N.C3, N.C3, N.E3, N.G3]
+    bass: [N.E2, N.E2, N.D2, N.D2, N.C2, N.C2, N.B2, N.B2]
   },
   battle: {
-    tempo: 130,
+    tempo: 220, // ~80 BPM chill lofi groove
     melody: [
-      { note: N.A4, dur: 0.09 }, { note: N.A4, dur: 0.09 }, { note: N.C5, dur: 0.09 }, { note: N.E5, dur: 0.14 },
-      { note: N.D5, dur: 0.09 }, { note: N.C5, dur: 0.09 }, { note: N.B4, dur: 0.09 }, { note: N.G4, dur: 0.14 },
-      { note: N.F4, dur: 0.09 }, { note: N.A4, dur: 0.09 }, { note: N.D5, dur: 0.09 }, { note: N.F5, dur: 0.14 },
-      { note: N.E5, dur: 0.09 }, { note: N.D5, dur: 0.09 }, { note: N.C5, dur: 0.09 }, { note: N.E5, dur: 0.14 }
+      { chord: [N.A4, N.C5, N.E5, N.G5], dur: 0.4 }, { chord: [N.C5, N.E5], dur: 0.25 },
+      { chord: [N.F4, N.A4, N.C5, N.E5], dur: 0.4 }, { chord: [N.A4, N.C5], dur: 0.25 },
+      { chord: [N.D4, N.F4, N.A4, N.C5], dur: 0.4 }, { chord: [N.F4, N.A4], dur: 0.25 },
+      { chord: [N.E4, N.G4, N.B4, N.D5], dur: 0.4 }, { chord: [N.G4, N.B4], dur: 0.25 }
     ],
-    bass: [N.A3, N.A3, N.F3, N.F3, N.D3, N.D3, N.E3, N.E3]
+    bass: [N.A2, N.A2, N.F2, N.F2, N.D2, N.D2, N.E2, N.E2]
   },
   boss: {
-    tempo: 110,
+    tempo: 240, // ~75 BPM dark lofi ambience
     melody: [
-      { note: N.D4, dur: 0.08 }, { note: N.F4, dur: 0.08 }, { note: N.G4, dur: 0.08 }, { note: N.G5, dur: 0.12 },
-      { note: N.F5, dur: 0.08 }, { note: N.D5, dur: 0.08 }, { note: N.C5, dur: 0.08 }, { note: N.D5, dur: 0.12 },
-      { note: N.D4, dur: 0.08 }, { note: N.F4, dur: 0.08 }, { note: N.A4, dur: 0.08 }, { note: N.D5, dur: 0.12 },
-      { note: N.C5, dur: 0.08 }, { note: N.A4, dur: 0.08 }, { note: N.F4, dur: 0.08 }, { note: N.E4, dur: 0.12 }
+      { chord: [N.D4, N.F4, N.A4, N.C5], dur: 0.45 }, { chord: [N.F4, N.A4], dur: 0.3 },
+      { chord: [N.Bb3, N.D4, N.F4, N.A4], dur: 0.45 }, { chord: [N.D4, N.F4], dur: 0.3 },
+      { chord: [N.G3, N.Bb3, N.D4, N.F4], dur: 0.45 }, { chord: [N.Bb3, N.D4], dur: 0.3 },
+      { chord: [N.A3, N.C4, N.E4, N.G4], dur: 0.45 }, { chord: [N.C4, N.E4], dur: 0.3 }
     ],
-    bass: [N.D3, N.D3, N.D3, N.F3, N.G3, N.G3, N.F3, N.C3]
+    bass: [N.D2, N.D2, N.Bb3, N.Bb3, N.G2, N.G2, N.A2, N.A2]
   }
 };
 
 let stepIndex = 0;
+
+function playVinylCrackle() {
+  if (!soundEnabled || Math.random() > 0.3) return;
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const bufferSize = Math.floor(ctx.sampleRate * 0.03);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * 0.015;
+    }
+    const source = ctx.createBufferSource();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'highpass';
+    filter.frequency.value = 3500;
+
+    source.buffer = buffer;
+    gain.gain.setValueAtTime(0.01, ctx.currentTime);
+    source.connect(filter);
+    filter.connect(ctx.destination);
+    source.start(ctx.currentTime);
+  } catch (e) {}
+}
 
 function stepBGM() {
   if (!soundEnabled || !currentBGMTrack || !MUSIC_TRACKS[currentBGMTrack]) return;
@@ -128,23 +172,54 @@ function stepBGM() {
   const mStep = track.melody[stepIndex % track.melody.length];
   const bStep = track.bass[Math.floor(stepIndex / 2) % track.bass.length];
 
-  if (mStep && mStep.note > 0) {
-    playTone(mStep.note, mStep.dur, 'square', 0.06, true);
+  if (mStep && mStep.chord) {
+    mStep.chord.forEach((freq, idx) => {
+      if (freq > 0) {
+        setTimeout(() => {
+          playTone(freq, mStep.dur, 'sine', 0.035, true, true);
+        }, idx * 15);
+      }
+    });
   }
+
   if (bStep && bStep > 0 && stepIndex % 2 === 0) {
-    playTone(bStep, 0.18, 'triangle', 0.08, true);
+    playTone(bStep, 0.4, 'triangle', 0.06, true, true);
   }
+
+  playVinylCrackle();
 
   stepIndex++;
 }
+
+// Audio File Mapping for Background Music
+const MUSIC_FILES = {
+  title: '/assets/musica/INICIO ANTES DE ENTERAR.mp3',
+  round1: '/assets/musica/primer jefe.mp3',
+  round2: '/assets/musica/segundo jefe.mp3',
+  round3: '/assets/musica/TERCER JEFE.mp3',
+  round4: '/assets/musica/cuarto jefe.mp3',
+  round5: '/assets/musica/quinto jefe.mp3',
+  boss: '/assets/musica/pelea final.mp3',
+  defeat: '/assets/musica/muerte.mp3'
+};
+
+let bgmAudio = null;
 
 export const Sounds = {
   setSoundEnabled(enabled) {
     soundEnabled = enabled;
     if (!enabled) {
       this.stopBGM();
-    } else if (currentBGMTrack) {
-      this.playBGM(currentBGMTrack);
+      if (audioCtx && audioCtx.state === 'running') {
+        try { audioCtx.suspend(); } catch (e) {}
+      }
+    } else {
+      if (audioCtx && audioCtx.state === 'suspended') {
+        try { audioCtx.resume(); } catch (e) {}
+      }
+      if (currentBGMTrack) {
+        this.playBGM(currentBGMTrack);
+      }
     }
   },
 
@@ -153,19 +228,46 @@ export const Sounds = {
   },
 
   playBGM(trackName = 'title') {
-    if (currentBGMTrack === trackName && bgmTimer) return;
+    if (currentBGMTrack === trackName && bgmAudio && !bgmAudio.paused) return;
+
     this.stopBGM();
     currentBGMTrack = trackName;
+
     if (!soundEnabled) return;
 
+    const file = MUSIC_FILES[trackName];
+    if (file) {
+      try {
+        bgmAudio = new Audio(encodeURI(file));
+        bgmAudio.loop = (trackName !== 'defeat');
+        bgmAudio.volume = 0.25; // 50% lower volume as requested
+
+        const playPromise = bgmAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {});
+        }
+        return;
+      } catch (e) {
+        // Fallback to synth if audio fails
+      }
+    }
+
+    // Fallback: synthesized BGM
     stepIndex = 0;
-    const track = MUSIC_TRACKS[trackName];
+    const track = MUSIC_TRACKS[trackName] || MUSIC_TRACKS['title'];
     if (track) {
       bgmTimer = setInterval(() => stepBGM(), track.tempo);
     }
   },
 
   stopBGM() {
+    if (bgmAudio) {
+      try {
+        bgmAudio.pause();
+        bgmAudio.currentTime = 0;
+      } catch (e) {}
+      bgmAudio = null;
+    }
     if (bgmTimer) {
       clearInterval(bgmTimer);
       bgmTimer = null;
@@ -231,7 +333,6 @@ export const Sounds = {
 
   /** Game over */
   gameOver() {
-    this.stopBGM();
     playTone(400, 0.3, 'square', 0.12);
     setTimeout(() => playTone(350, 0.3, 'square', 0.1), 300);
     setTimeout(() => playTone(300, 0.3, 'square', 0.08), 600);
