@@ -408,25 +408,6 @@ export function enemyEntrance(enemyEl) {
 }
 
 /**
- * Player idle breathing deformation animation
- * Deforms top edge up and down ~5% (Photoshop Shift top edge vertical deform)
- */
-export function playerIdle(playerSpriteEl) {
-  if (!playerSpriteEl) return null;
-
-  gsap.killTweensOf(playerSpriteEl);
-  gsap.set(playerSpriteEl, { transformOrigin: '25% 100%' });
-
-  return gsap.to(playerSpriteEl, {
-    scaleY: 0.95,
-    duration: 1.1,
-    repeat: -1,
-    yoyo: true,
-    ease: 'sine.inOut'
-  });
-}
-
-/**
  * Enemy idle breathing animation (Supports multi-layer SVG animations)
  */
 export function enemyIdle(enemyEl) {

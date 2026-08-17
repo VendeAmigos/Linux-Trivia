@@ -14,7 +14,6 @@ import {
   fadeOutScreen,
   transitionScreens,
   playerAttack,
-  playerIdle,
   enemyAttack,
   animateHPBar,
   comboAnimation,
@@ -80,7 +79,6 @@ let state = {
   timeLeft: TIMER_DURATION,
   soundEnabled: true,
   enemyIdleAnim: null,
-  playerIdleAnim: null,
   scoreSaved: false,
 };
 
@@ -164,15 +162,7 @@ const svgCache = new Map();
 // Helper to render SVG sprites or emojis cleanly (inlining SVGs for layer animations)
 async function renderSprite(containerEl, spritePath, defaultEmoji = '👾') {
   if (!containerEl) return;
-  if (!spritePath) {
-    containerEl.textContent = defaultEmoji;
-    return;
-  }
-
-  // Check if it's an SVG file that needs inlining
-  const isSvg = spritePath.includes('.svg');
-
-  if (isSvg) {
+  if (spritePath && (spritePath.endsWith('.svg') || spritePath.startsWith('/'))) {
     try {
       let svgText = '';
       if (svgCache.has(spritePath)) {
@@ -184,7 +174,7 @@ async function renderSprite(containerEl, spritePath, defaultEmoji = '👾') {
           svgCache.set(spritePath, svgText);
         }
       }
-      if (svgText && svgText.trim().startsWith('<svg')) {
+      if (svgText) {
         containerEl.innerHTML = svgText;
         const svgEl = containerEl.querySelector('svg');
         if (svgEl) {
@@ -195,14 +185,9 @@ async function renderSprite(containerEl, spritePath, defaultEmoji = '👾') {
         return;
       }
     } catch (e) {
-      // Fallback to img if SVG fetch fails
+      // Fallback to img if fetch fails
     }
-  }
-
-  // For non-SVG images (.png, .gif, etc.) or paths
-  if (spritePath.includes('/') || spritePath.includes('.')) {
-    const cleanPath = encodeURI(spritePath);
-    containerEl.innerHTML = `<img src="${cleanPath}" alt="sprite" class="sprite-svg" />`;
+    containerEl.innerHTML = `<img src="${spritePath}" alt="sprite" class="sprite-svg" />`;
   } else {
     containerEl.textContent = spritePath || defaultEmoji;
   }
@@ -211,22 +196,17 @@ async function renderSprite(containerEl, spritePath, defaultEmoji = '👾') {
 // ============================================
 // INITIALIZATION
 // ============================================
-async function init() {
+function init() {
   createStarfield();
   setupEventListeners();
   animateTitleScreen();
-  await renderSprite(playerSprite, '/assets/player.png', '🧙‍♂️');
-  if (state.playerIdleAnim) state.playerIdleAnim.kill();
-  state.playerIdleAnim = playerIdle(playerSprite);
-
+  renderSprite(playerSprite, '/assets/player.svg', '🧙‍♂️');
   const logoEl = document.querySelector('.game-logo');
   if (logoEl) renderSprite(logoEl, '/assets/logo.svg', '🐧⚔️🐉');
 
   // Start background music on user interaction
   const startBGMOnInteraction = () => {
-    if (state.soundEnabled) {
-      Sounds.playBGM('title');
-    }
+    Sounds.playBGM('title');
     document.removeEventListener('click', startBGMOnInteraction);
     document.removeEventListener('keydown', startBGMOnInteraction);
   };
@@ -238,7 +218,7 @@ function createStarfield() {
   const starfield = $('starfield');
   if (!starfield) return;
   starfield.innerHTML = '';
-  const count = 50; // Optimized star count
+  const count = 100;
 
   for (let i = 0; i < count; i++) {
     const star = document.createElement('div');
@@ -251,7 +231,6 @@ function createStarfield() {
       left: ${Math.random() * 100}%;
       --duration: ${Math.random() * 3 + 2}s;
       animation-delay: ${Math.random() * 3}s;
-      will-change: transform, opacity;
     `;
     starfield.appendChild(star);
   }
@@ -336,15 +315,11 @@ function setupEventListeners() {
   });
 
   // Sound toggle
-  if (soundToggle) {
-    soundToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      state.soundEnabled = !state.soundEnabled;
-      Sounds.setSoundEnabled(state.soundEnabled);
-      soundToggle.textContent = state.soundEnabled ? '🔊' : '🔇';
-    });
-  }
+  soundToggle.addEventListener('click', () => {
+    state.soundEnabled = !state.soundEnabled;
+    Sounds.setSoundEnabled(state.soundEnabled);
+    soundToggle.textContent = state.soundEnabled ? '🔊' : '🔇';
+  });
 }
 
 // ============================================
@@ -363,7 +338,7 @@ function showScreen(targetScreen) {
 // ============================================
 // GAME FLOW
 // ============================================
-async function startGame() {
+function startGame() {
   // Reset state
   state.playerHP = 100;
   state.playerMaxHP = 100;
@@ -373,11 +348,6 @@ async function startGame() {
   state.currentRound = 0;
   state.currentQuestionIndex = 0;
   state.scoreSaved = false;
-
-  // Ensure player sprite is PNG and idle deformation is running
-  await renderSprite(playerSprite, '/assets/player.png', '🧙‍♂️');
-  if (state.playerIdleAnim) state.playerIdleAnim.kill();
-  state.playerIdleAnim = playerIdle(playerSprite);
 
   // Get questions based on difficulty
   const totalQuestions = ENEMIES.reduce((sum, e) => sum + e.questionsPerRound, 0);
@@ -400,10 +370,8 @@ function startRound() {
   state.currentEnemyHP = state.currentEnemyMaxHP;
   state.roundQuestionIndex = 0;
 
-  // Start BGM: specific MP3 track for current enemy / round
-  const roundTracks = ['round1', 'round2', 'round3', 'round4', 'round5', 'boss'];
-  const musicTrack = roundTracks[state.currentRound] || 'boss';
-  Sounds.playBGM(musicTrack);
+  // Start BGM: Boss theme for last round, Battle theme otherwise
+  Sounds.playBGM(isBoss ? 'boss' : 'battle');
 
   // Kill previous idle animation
   if (state.enemyIdleAnim) {
@@ -675,16 +643,6 @@ async function handleCorrectAnswer(selectedIndex) {
   enemyDamage.textContent = `-${damage}`;
   enemyDamage.style.color = '#fbbf24';
 
-  // Stop idle animation and reset transforms
-  if (state.playerIdleAnim) {
-    state.playerIdleAnim.kill();
-    state.playerIdleAnim = null;
-  }
-  gsap.set(playerSprite, { clearProps: 'transform' });
-
-  // Play attack GIF animation (adding timestamp to ensure frame 0 restart)
-  await renderSprite(playerSprite, '/assets/player animation.gif?t=' + Date.now());
-
   // Player attack animation
   Sounds.playerAttack();
   await playerAttack(
@@ -692,10 +650,6 @@ async function handleCorrectAnswer(selectedIndex) {
     $('enemy-character'),
     enemyDamage
   );
-
-  // Return to resting PNG & restart idle top-edge deformation
-  await renderSprite(playerSprite, '/assets/player.png');
-  state.playerIdleAnim = playerIdle(playerSprite);
 
   // Apply damage to enemy
   state.currentEnemyHP = Math.max(0, state.currentEnemyHP - damage);
@@ -780,7 +734,6 @@ function handleVictory() {
 }
 
 function handlePlayerDefeated() {
-  Sounds.playBGM('defeat');
   Sounds.gameOver();
 
   defeatScore.textContent = state.score.toLocaleString();
@@ -875,13 +828,9 @@ async function showLeaderboard() {
 // ============================================
 // UTILITIES
 // ============================================
-async function resetAndGoToTitle() {
+function resetAndGoToTitle() {
   stopTimer();
   if (state.enemyIdleAnim) state.enemyIdleAnim.kill();
-  if (state.playerIdleAnim) state.playerIdleAnim.kill();
-
-  await renderSprite(playerSprite, '/assets/player.png', '🧙‍♂️');
-  state.playerIdleAnim = playerIdle(playerSprite);
 
   state.playerHP = 100;
   state.score = 0;
