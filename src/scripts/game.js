@@ -38,12 +38,12 @@ import {
 // ENEMY DEFINITIONS
 // ============================================
 const ENEMIES = [
-  { name: 'Troyano', sprite: '/assets/enemy-trojan.svg', emoji: '🐴', hp: 40, damage: 10, questionsPerRound: 2 },
-  { name: 'Bug', sprite: '/assets/enemy-bug.svg', emoji: '🐛', hp: 55, damage: 12, questionsPerRound: 2 },
-  { name: 'Malware', sprite: '/assets/enemy-malware.svg', emoji: '🦠', hp: 70, damage: 15, questionsPerRound: 2 },
-  { name: 'Ransomware', sprite: '/assets/enemy-ransomware.svg', emoji: '🔒💀', hp: 85, damage: 18, questionsPerRound: 2 },
-  { name: 'Hacker Oscuro', sprite: '/assets/enemy-hacker.svg', emoji: '👤💻', hp: 100, damage: 20, questionsPerRound: 3 },
-  { name: 'Dragón del Servidor', sprite: '/assets/enemy-dragon.svg', emoji: '🐉🖥️', hp: 150, damage: 25, questionsPerRound: 4 },
+  { name: 'Teclado Mariposa', sprite: '/assets/enemy-trojan.svg', emoji: '🦋', hp: 40, damage: 10, questionsPerRound: 2 },
+  { name: 'Cable Pelado', sprite: '/assets/enemy-bug.svg', emoji: '🔌', hp: 55, damage: 12, questionsPerRound: 2 },
+  { name: 'Batería Inflada', sprite: '/assets/enemy-malware.svg', emoji: '🔋', hp: 70, damage: 15, questionsPerRound: 2 },
+  { name: 'Kernel Panic', sprite: '/assets/enemy-ransomware.svg', emoji: '⚠️', hp: 85, damage: 18, questionsPerRound: 2 },
+  { name: 'Spinning Beach Ball', sprite: '/assets/enemy-hacker.svg', emoji: '⛱️', hp: 100, damage: 20, questionsPerRound: 3 },
+  { name: 'Genius Bar Final', sprite: '/assets/enemy-dragon.svg', emoji: '🍏', hp: 150, damage: 25, questionsPerRound: 4 },
 ];
 
 const DIFFICULTY_MULTIPLIERS = {
@@ -150,6 +150,7 @@ const defeatRound = $('defeat-round');
 const defeatCombo = $('defeat-combo');
 const btnPlayAgainLose = $('btn-play-again-lose');
 const btnLeaderboardLose = $('btn-leaderboard-lose');
+const btnSaveScoreLose = $('btn-save-score-lose');
 
 // Leaderboard
 const leaderboardBody = $('leaderboard-body');
@@ -318,14 +319,12 @@ function setupEventListeners() {
   });
 
   // Defeat buttons
-  btnPlayAgainLose.addEventListener('click', () => {
-    Sounds.click();
-    resetAndGoToTitle();
+  btnPlayAgainLose.addEventListener('click', () => location.reload());
+  btnLeaderboardLose.addEventListener('click', async () => {
+    showScreen(screenLeaderboard);
+    await updateLeaderboardUI();
   });
-  btnLeaderboardLose.addEventListener('click', () => {
-    Sounds.click();
-    showLeaderboard();
-  });
+  if (btnSaveScoreLose) btnSaveScoreLose.addEventListener('click', () => handleSaveScore(false));
 
   // Leaderboard back
   btnBackToTitle.addEventListener('click', () => {
@@ -787,6 +786,9 @@ function handlePlayerDefeated() {
   defeatRound.textContent = `${state.currentRound + 1}/${ENEMIES.length}`;
   defeatCombo.textContent = `x${state.maxCombo}`;
 
+  btnSaveScoreLose.disabled = false;
+  btnSaveScoreLose.textContent = '💾 Guardar Puntaje';
+
   showScreen(screenDefeat);
 
   setTimeout(() => {
@@ -797,31 +799,33 @@ function handlePlayerDefeated() {
 // ============================================
 // SAVE SCORE
 // ============================================
-async function handleSaveScore() {
+async function handleSaveScore(isVictory = true) {
   if (state.scoreSaved) return;
 
-  btnSaveScore.disabled = true;
-  btnSaveScore.textContent = '⏳ Guardando...';
+  const btn = isVictory ? btnSaveScore : btnSaveScoreLose;
+  btn.disabled = true;
+  btn.textContent = '⏳ Guardando...';
 
   const result = await saveScore({
     playerName: state.playerName,
     score: state.score,
     difficulty: state.difficulty,
     hpRemaining: state.playerHP,
-    comboMax: state.maxCombo
+    comboMax: state.maxCombo,
+    roundReached: state.currentRound + 1
   });
 
   if (result.success) {
     state.scoreSaved = true;
-    btnSaveScore.textContent = '✅ ¡Guardado!';
+    btn.textContent = '✅ ¡Guardado!';
     Sounds.correct();
 
     if (result.local) {
-      btnSaveScore.textContent = '✅ Guardado (local)';
+      btn.textContent = '✅ Guardado (local)';
     }
   } else {
-    btnSaveScore.textContent = '❌ Error';
-    btnSaveScore.disabled = false;
+    btn.textContent = '❌ Error';
+    btn.disabled = false;
   }
 }
 
@@ -852,6 +856,7 @@ async function showLeaderboard() {
       <div class="leaderboard-row">
         <div class="leaderboard-rank">${medal}</div>
         <div class="leaderboard-name">${escapeHTML(entry.player_name)}</div>
+        <div class="leaderboard-score" style="text-align: right; color: var(--text-muted);">${entry.round_reached || '-'}</div>
         <div class="leaderboard-score">${entry.score.toLocaleString()}</div>
         <div class="leaderboard-difficulty" style="color: ${diffColors[diff]}">${diffLabels[diff] || diff}</div>
       </div>

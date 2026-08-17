@@ -27,14 +27,15 @@ function getSupabase() {
  * @param {string} scoreData.difficulty - 'easy', 'normal', 'hard'
  * @param {number} scoreData.hpRemaining - HP left at the end
  * @param {number} scoreData.comboMax - Highest combo streak achieved
+ * @param {number} scoreData.roundReached - Round reached before defeat
  * @returns {Object} { success: boolean, data?: any, error?: string }
  */
-export async function saveScore({ playerName, score, difficulty, hpRemaining, comboMax }) {
+export async function saveScore({ playerName, score, difficulty, hpRemaining, comboMax, roundReached = 6 }) {
   const client = getSupabase();
 
   if (!client) {
     console.warn('Supabase not configured. Score saved locally only.');
-    saveScoreLocal({ playerName, score, difficulty, hpRemaining, comboMax });
+    saveScoreLocal({ playerName, score, difficulty, hpRemaining, comboMax, roundReached });
     return { success: true, local: true };
   }
 
@@ -46,21 +47,22 @@ export async function saveScore({ playerName, score, difficulty, hpRemaining, co
         score: score,
         difficulty: difficulty,
         hp_remaining: hpRemaining,
-        combo_max: comboMax
+        combo_max: comboMax,
+        round_reached: roundReached
       }])
       .select();
 
     if (error) {
       console.error('Supabase insert error:', error);
       // Fallback to localStorage
-      saveScoreLocal({ playerName, score, difficulty, hpRemaining, comboMax });
+      saveScoreLocal({ playerName, score, difficulty, hpRemaining, comboMax, roundReached });
       return { success: true, local: true, error: error.message };
     }
 
     return { success: true, data };
   } catch (err) {
     console.error('Supabase connection error:', err);
-    saveScoreLocal({ playerName, score, difficulty, hpRemaining, comboMax });
+    saveScoreLocal({ playerName, score, difficulty, hpRemaining, comboMax, roundReached });
     return { success: true, local: true, error: err.message };
   }
 }
@@ -103,7 +105,7 @@ export async function getTopScores(limit = 10) {
 
 const LOCAL_KEY = 'rpg_trivia_leaderboard';
 
-function saveScoreLocal({ playerName, score, difficulty, hpRemaining, comboMax }) {
+function saveScoreLocal({ playerName, score, difficulty, hpRemaining, comboMax, roundReached }) {
   try {
     const scores = getLocalScores(100);
     scores.push({
@@ -112,6 +114,7 @@ function saveScoreLocal({ playerName, score, difficulty, hpRemaining, comboMax }
       difficulty,
       hp_remaining: hpRemaining,
       combo_max: comboMax,
+      round_reached: roundReached,
       created_at: new Date().toISOString()
     });
     scores.sort((a, b) => b.score - a.score);

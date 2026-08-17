@@ -2,16 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="🐧 Linux Quest — Derrota al Dragón del Servidor">
+<Layout title="🍎 Mac Quest — Conquista el Ecosistema Apple">
   <div id="game-container">
 
     <!-- ========================================
          SCREEN: TITLE
          ======================================== -->
     <section class="screen active" id="screen-title">
-      <div class="game-logo">🐧⚔️🐉</div>
-      <h1 class="game-title" id="game-title">Linux Quest</h1>
-      <p class="game-subtitle">Derrota al Dragón del Servidor</p>
+      <div class="game-logo">🍎📱💻</div>
+      <h1 class="game-title" id="game-title">MAC QUEST</h1>
+      <p class="game-subtitle">El Desafío Definitivo de Apple</p>
 
       <div class="title-input-group">
         <input
@@ -23,7 +23,7 @@ import Layout from '../layouts/Layout.astro';
           autocomplete="off"
         />
         <button class="btn btn-primary" id="btn-start">
-          ⚔️ Comenzar Aventura
+          ▶️ Iniciar Quest
         </button>
         <button class="btn btn-secondary" id="btn-leaderboard-view">
           🏆 Leaderboard
@@ -210,6 +210,9 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <div class="button-group">
+        <button class="btn btn-gold" id="btn-save-score-lose">
+          💾 Guardar Puntaje
+        </button>
         <button class="btn btn-primary" id="btn-play-again-lose">
           🔄 Intentar de Nuevo
         </button>
@@ -229,8 +232,9 @@ import Layout from '../layouts/Layout.astro';
         <div class="leaderboard-header">
           <div>#</div>
           <div>Jugador</div>
+          <div style="text-align:right">Ronda</div>
           <div style="text-align:right">Puntos</div>
-          <div style="text-align:right">Dificultad</div>
+          <div style="text-align:right">Dif</div>
         </div>
         <div id="leaderboard-body">
           <div class="leaderboard-empty">Cargando...</div>
