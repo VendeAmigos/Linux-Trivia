@@ -6,221 +6,221 @@
 export const questions = {
   "easy": [
     {
-      "question": "¿En qué fecha exacta fue presentado el Macintosh 128K por Steve Jobs en Cupertino?",
+      "question": "¿Qué es macOS?",
       "options": [
-        "12 de octubre de 1977",
-        "24 de enero de 1984",
-        "15 de marzo de 1996",
-        "20 de diciembre de 2001"
+        "Un programa de edición de video",
+        "El sistema operativo desarrollado por Apple para sus computadoras Mac",
+        "Una aplicación de seguridad de Windows",
+        "El procesador físico de las computadoras Apple"
       ],
       "correctIndex": 1,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Cuál fue la primera computadora comercial de Apple en incluir una Interfaz Gráfica de Usuario (GUI) y un ratón?",
+      "question": "¿Qué recursos físicos administra principalmente macOS en la computadora?",
       "options": [
-        "Apple II",
-        "Apple Lisa",
-        "Macintosh 128K",
-        "NeXT Cube"
+        "Únicamente la batería",
+        "Memoria, almacenamiento, archivos y dispositivos conectados",
+        "Los sitios web en internet",
+        "Solamente los altavoces"
       ],
       "correctIndex": 1,
       "category": "Historia Mac"
     },
     {
-      "question": "¿En qué año se lanzó al mercado la computadora Apple II?",
+      "question": "¿En qué año fue presentada la computadora Macintosh original de Apple?",
       "options": [
         "1976",
-        "1977",
-        "1981",
-        "1984"
+        "1984",
+        "2001",
+        "2016"
       ],
       "correctIndex": 1,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué eslogan célebre acompañó la presentación del Macintosh en 1984?",
+      "question": "¿Qué característica técnica destacó a la Macintosh presentada en 1984?",
       "options": [
-        "\"Think Different\"",
-        "\"Power is Beauty\"",
-        "\"For the rest of us\" (Para el resto de nosotros)",
-        "\"The Computer for Tomorrow\""
+        "Su procesador M1",
+        "Su interfaz gráfica",
+        "Su capacidad de conectarse a iCloud",
+        "Su compatibilidad con Windows"
+      ],
+      "correctIndex": 1,
+      "category": "Historia Mac"
+    },
+    {
+      "question": "¿En qué año apareció la versión del sistema operativo conocida como Mac OS X?",
+      "options": [
+        "1984",
+        "1998",
+        "2001",
+        "2016"
       ],
       "correctIndex": 2,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué renombrado director de cine dirigió el famoso comercial de televisión \"1984\" transmitido durante el Super Bowl?",
+      "question": "¿En qué año Apple adoptó oficialmente el nombre \"macOS\" para su sistema de escritorio?",
       "options": [
-        "Steven Spielberg",
-        "Ridley Scott",
-        "George Lucas",
-        "James Cameron"
+        "2001",
+        "2010",
+        "2016",
+        "2020"
+      ],
+      "correctIndex": 2,
+      "category": "Historia Mac"
+    },
+    {
+      "question": "¿Qué nueva tecnología de procesadores para Mac comenzó a utilizarse en el año 2020?",
+      "options": [
+        "Procesadores Intel Core",
+        "Apple Silicon",
+        "AMD Ryzen",
+        "PowerPC"
       ],
       "correctIndex": 1,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Cuál fue la razón principal por la que la computadora Apple Lisa fue un fracaso comercial a pesar de sus innovaciones?",
+      "question": "Según la presentación, ¿qué función cumple macOS entre el usuario y los componentes físicos?",
       "options": [
-        "No tenía monitor",
-        "Costaba casi $10,000 USD ($9,995 USD) y su funcionamiento era lento",
-        "No incluía teclado",
-        "No permitía guardar archivos"
+        "Funciona como antivirus",
+        "Funciona como intermediario",
+        "Bloquea el uso de hardware de terceros",
+        "Acelera la conexión a internet"
       ],
       "correctIndex": 1,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Cómo operaban las computadoras antes de la llegada de la interfaz gráfica y el mouse?",
+      "question": "¿Qué elementos permiten acceder rápidamente a aplicaciones y funciones del sistema en la interfaz de macOS?",
       "options": [
-        "Mediante pantallas táctiles",
-        "Mediante líneas de comando en pantallas monocromáticas de fósforo verde o blanco",
-        "Únicamente por tarjetas perforadas",
-        "Con comandos de voz"
+        "Terminal y Símbolo del Sistema",
+        "Escritorio, barra de menús y Dock",
+        "Panel de Control y Administrador de Tareas",
+        "Safari e iTunes"
       ],
       "correctIndex": 1,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué nombre recibió la interfaz visual traslúcida y brillante presentada en Mac OS X en el año 2001?",
+      "question": "¿Cuál es la herramienta utilizada en macOS para organizar y administrar archivos y carpetas?",
       "options": [
-        "Platinum UI",
-        "Aqua UI",
-        "Metro UI",
-        "Snow White"
+        "Explorer",
+        "Spotlight",
+        "Finder",
+        "FileVault"
+      ],
+      "correctIndex": 2,
+      "category": "Historia Mac"
+    },
+    {
+      "question": "¿Qué herramienta de macOS permite encontrar rápidamente documentos, aplicaciones y otra información?",
+      "options": [
+        "Finder",
+        "Spotlight",
+        "Handoff",
+        "AirDrop"
       ],
       "correctIndex": 1,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué empresa fundada por Steve Jobs en 1985 fue adquirida por Apple en 1996 para servir de base a su nuevo sistema operativo?",
+      "question": "Al ser desarrollado específicamente para computadoras Mac, ¿qué logra macOS con los componentes del equipo?",
       "options": [
-        "NeXT",
-        "Pixar",
-        "Xerox PARC",
-        "Commodore"
+        "Estar optimizado para su hardware",
+        "Reducir la vida útil de la batería",
+        "Limitar la resolución de pantalla",
+        "Evitar que se instale internet"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué dispositivo presentado en 2007 derivó directamente de Mac OS X adaptando la interfaz al control multitáctil?",
+      "question": "¿En qué áreas profesionales es comúnmente utilizado macOS debido a su estabilidad y facilidad de uso?",
       "options": [
-        "iPad",
-        "iPod Classic",
-        "iPhone (iOS)",
-        "Apple Watch"
+        "Solo en contabilidad",
+        "Fotografía, edición de video, diseño gráfico, programación y producción musical",
+        "Únicamente en atención al cliente",
+        "Exclusivamente en la milicia"
+      ],
+      "correctIndex": 1,
+      "category": "Historia Mac"
+    },
+    {
+      "question": "¿A qué elementos de la computadora macOS puede limitarles el acceso a las aplicaciones por razones de seguridad?",
+      "options": [
+        "Al teclado y el ratón",
+        "Al cable de corriente",
+        "A los archivos, cámara, micrófono o fotografías",
+        "A la pantalla principal"
       ],
       "correctIndex": 2,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué sistema operativo presentado en 2024 marca la frontera más reciente de Apple en computación espacial?",
+      "question": "¿Cómo se llama la función integrada en macOS que permite cifrar los datos almacenados en la computadora?",
       "options": [
-        "tvOS",
-        "iPadOS",
-        "visionOS",
-        "watchOS"
+        "FileVault",
+        "BitLocker",
+        "iCloud Drive",
+        "AirDrop"
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué componente central del sistema operativo del Mac se introdujo desde System 1 para gestionar carpetas, documentos y la papelera?",
+      "question": "Menciona tres productos de Apple con los que la Mac puede trabajar en integración dentro del ecosistema.",
       "options": [
-        "Terminal",
+        "Xbox, PlayStation y Nintendo",
+        "iPhone, iPad y Apple Watch",
+        "Android, Windows y Linux",
+        "Kindle, Alexa y FireTV"
+      ],
+      "correctIndex": 1,
+      "category": "Historia Mac"
+    },
+    {
+      "question": "¿Qué función de macOS permite compartir archivos rápidamente de forma inalámbrica?",
+      "options": [
         "Finder",
-        "Dashboard",
-        "Control Strip"
-      ],
-      "correctIndex": 1,
-      "category": "Historia Mac"
-    },
-    {
-      "question": "¿Quién fue la diseñadora encargada de la iconografía gráfica bitmap del primer Macintosh en 1984?",
-      "options": [
-        "Jony Ive",
-        "Susan Kare",
-        "Hartmut Esslinger",
-        "Jerry Manock"
-      ],
-      "correctIndex": 1,
-      "category": "Historia Mac"
-    },
-    {
-      "question": "¿Cómo se llamaban los primeros sistemas operativos de disco de la serie Apple II anteriores a la era gráfica?",
-      "options": [
-        "MS-DOS y PC-DOS",
-        "Apple DOS y ProDOS",
-        "System 1 y System 2",
-        "A/UX y Copland"
-      ],
-      "correctIndex": 1,
-      "category": "Historia Mac"
-    },
-    {
-      "question": "¿En qué mes y año fue lanzado comercialmente Mac OS X?",
-      "options": [
-        "Enero de 1996",
-        "Marzo de 2001",
-        "Junio de 2007",
-        "Septiembre de 2015"
-      ],
-      "correctIndex": 1,
-      "category": "Historia Mac"
-    },
-    {
-      "question": "¿Qué capacidad de memoria RAM incluía el Macintosh original de 1984?",
-      "options": [
-        "64 KB",
-        "128 KB",
-        "512 KB",
-        "1 MB"
-      ],
-      "correctIndex": 1,
-      "category": "Historia Mac"
-    },
-    {
-      "question": "¿En qué año se separó iPadOS como sistema operativo propio enfocado en productividad y pantallas grandes?",
-      "options": [
-        "2010",
-        "2015",
-        "2019",
-        "2022"
+        "Handoff",
+        "AirDrop",
+        "iCloud"
       ],
       "correctIndex": 2,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Por qué monto económico adquirió Apple a la compañía NeXT en diciembre de 1996?",
+      "question": "¿Qué servicio se encarga de sincronizar información entre los diferentes dispositivos de Apple?",
       "options": [
-        "$100 millones de dólares",
-        "$429 millones de dólares",
-        "$1,000 millones de dólares",
-        "$2,500 millones de dólares"
-      ],
-      "correctIndex": 1,
-      "category": "Historia Mac"
-    },
-    {
-      "question": "¿En qué año se lanzaron los sistemas operativos watchOS y tvOS?",
-      "options": [
-        "2007",
-        "2010",
-        "2015",
-        "2019"
+        "AirDrop",
+        "Handoff",
+        "iCloud",
+        "Spotlight"
       ],
       "correctIndex": 2,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué tecnología de procesador integraba la computadora Apple Lisa de 1983? ---",
+      "question": "¿Qué función permite continuar en la Mac una actividad que fue iniciada en un iPhone u otro dispositivo compatible?",
       "options": [
-        "Intel 8086",
-        "Motorola 68000 @ 5 MHz",
-        "PowerPC 601",
-        "Apple M1"
+        "FileVault",
+        "AirDrop",
+        "Spotlight",
+        "Handoff"
+      ],
+      "correctIndex": 3,
+      "category": "Historia Mac"
+    },
+    {
+      "question": "¿Qué aspecto de seguridad proporciona Apple mediante actualizaciones del sistema operativo? ---",
+      "options": [
+        "Nuevos teclados",
+        "Mejoras de seguridad y correcciones de problemas",
+        "Mayor capacidad de memoria RAM física",
+        "Acceso a internet gratis"
       ],
       "correctIndex": 1,
       "category": "Historia Mac"
@@ -228,221 +228,221 @@ export const questions = {
   ],
   "normal": [
     {
-      "question": "¿Cuál era la limitación técnica estructural más grave del Mac OS Clásico (1984 - 2001)?",
+      "question": "Según el texto, el diseño general de macOS busca ofrecer una experiencia:",
       "options": [
-        "No permitía carpetas anidadas",
-        "Carecía de multitarea real preventiva y memoria protegida",
-        "No podía conectarse a impresoras",
-        "Solo funcionaba en monitores en blanco y negro"
+        "Compleja, abierta y experimental",
+        "Sencilla, segura y estable",
+        "Económica, variable y colorida",
+        "Exclusiva para servidores web"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué sucedía en el Mac OS Clásico si una sola aplicación en ejecución sufría un fallo crítico?",
+      "question": "Antes de llamarse macOS en 2016 y OS X, ¿cómo se llamaba el sistema introducido en 2001?",
       "options": [
-        "El sistema cerraba la aplicación y continuaba funcionando normalmente",
-        "Toda la computadora se congelaba y requería un reinicio forzado del sistema",
-        "Se abría una ventana del Finder indicando el error sin afectar las demás apps",
-        "El sistema operativo cambiaba automáticamente a modo de comando"
+        "Mac OS X",
+        "System 7",
+        "Macintosh OS",
+        "Apple OS"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Cómo se llamó el fallido proyecto interno de Apple en 1996 que intentó reconstruir el sistema operativo mediante un microkernel?",
+      "question": "¿De qué manera macOS permite que varias aplicaciones funcionen al mismo tiempo?",
       "options": [
-        "A/UX",
-        "Copland",
-        "Rhapsody",
-        "Platinum"
+        "Cerrando las aplicaciones en segundo plano",
+        "Pidiendo permiso al usuario para cada acción",
+        "Administrando los procesos y la memoria de forma transparente para el usuario",
+        "Usando exclusivamente el almacenamiento de iCloud"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué ejecutivo de Apple canceló el proyecto Copland en 1996 e inició la búsqueda externa de un nuevo sistema operativo?",
+      "question": "La barra de menús en macOS se caracteriza por:",
       "options": [
-        "John Sculley",
-        "Gil Amelio",
-        "Michael Spindler",
-        "Steve Wozniak"
+        "Estar oculta siempre",
+        "Permitir acceder rápidamente a funciones del sistema y de las aplicaciones",
+        "Reemplazar al teclado",
+        "Aparecer solo en el iPhone"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué sistema operativo basado en UNIX lanzó Apple en febrero de 1988 para servidores y entorno académico?",
+      "question": "El uso de macOS en áreas como edición de video y programación se justifica por su:",
       "options": [
-        "NeXTSTEP",
-        "A/UX (Apple Unix)",
-        "ProDOS",
-        "Darwin"
+        "Bajo costo",
+        "Código abierto",
+        "Facilidad de uso, seguridad y estabilidad",
+        "Compatibilidad con juegos de Windows"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿En qué estándar o versión de UNIX se basó el sistema A/UX en 1988?",
+      "question": "Además de limitar el acceso a la cámara y micrófono, ¿qué otro elemento protege el control de permisos en macOS?",
       "options": [
-        "BSD 4.4",
-        "AT&T System V Release 2.2",
-        "POSIX 1.0",
-        "Solaris 2.0"
+        "El ratón",
+        "Los archivos y fotografías",
+        "El brillo de la pantalla",
+        "La conexión Bluetooth"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué nombre recibió el tema estético e interfaz gráfica introducido formalmente en Mac OS 8 en 1997?",
+      "question": "¿Qué nombre recibe la familia de procesadores diseñados por Apple que reemplazaron a Intel en 2020?",
       "options": [
-        "Aqua UI",
-        "Platinum UI",
-        "Flat Design",
-        "Classic Grey"
+        "Apple Core",
+        "Apple Silicon",
+        "Mac Chips",
+        "iProcessor"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Quiénes fueron los diseñadores del chasis e ingeniería industrial del Macintosh 128K original?",
+      "question": "Menciona una de las grandes ventajas de macOS frente a otros sistemas operativos, según la presentación:",
       "options": [
-        "Jony Ive y Steve Jobs",
-        "Jerry Manock y Hartmut Esslinger",
-        "Susan Kare y Bill Atkinson",
-        "Andy Hertzfeld y Rod Holt"
+        "Su precio muy económico",
+        "Su integración y ecosistema entre dispositivos Apple",
+        "Su inmensa variedad de hardware disponible",
+        "Su compatibilidad nativa con todo el software de Windows"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Cuál fue la última versión publicada de la era del Mac OS Clásico antes del despliegue total de Mac OS X?",
+      "question": "¿Cuál es una de las desventajas que menciona la presentación sobre las computadoras Mac?",
       "options": [
-        "System 7.5.3",
-        "Mac OS 8.6",
-        "Mac OS 9.2.2",
-        "Mac OS X 10.0"
+        "Son muy lentas para diseño gráfico",
+        "No tienen interfaz gráfica",
+        "Suelen tener un precio elevado",
+        "No tienen conexión a internet"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué elemento del chasis del Macintosh 128K reflejaba su diseño portátil y \"amigable\" todo-en-uno?",
+      "question": "En cuanto a hardware, ¿cuál es una desventaja de macOS comparado con Windows?",
       "options": [
-        "Una batería extraíble",
-        "Un asa superior integrada para transportarlo",
-        "Una funda de piel de regalo",
-        "Teclado inalámbrico"
+        "Existe una menor variedad de hardware disponible",
+        "Se daña fácilmente con virus",
+        "Los procesadores son demasiado antiguos",
+        "No se le puede conectar un ratón"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué resolución y dimensiones de pantalla tenía el tubo CRT monocromático del Macintosh 128K?",
+      "question": "¿En qué tipo de aplicaciones macOS tiene MENOR compatibilidad respecto a Windows?",
       "options": [
-        "12 pulgadas a 640x480 píxeles",
-        "9 pulgadas monocromo a 512x342 píxeles",
-        "14 pulgadas a 800x600 píxeles",
-        "15 pulgadas a 1024x768 píxeles"
+        "En navegadores web",
+        "En aplicaciones de edición de fotos",
+        "En algunos videojuegos y programas especializados",
+        "En procesadores de texto"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué tecnología de interacción gráfica incluye el sistema visionOS en Apple Vision Pro?",
+      "question": "¿Cuál es la principal diferencia conceptual de diseño entre macOS y Windows?",
       "options": [
-        "Pantalla táctil resistiva",
-        "Renderizado foveado y rastreo ocular en 3D",
-        "Teclado virtual flotante exclusivo sin seguimiento",
-        "Joysticks físicos adheribles"
+        "macOS es gratis y Windows es de pago",
+        "macOS es para Apple y Windows puede usarse en equipos de múltiples fabricantes",
+        "Windows no usa interfaz gráfica",
+        "macOS no puede reproducir video"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿En qué consistía la diferencia entre la multitarea cooperativa (Mac OS Clásico) y la multitarea preventiva (Mac OS X)?",
+      "question": "El cambio a procesadores Apple Silicon en 2020 permitió mejorar enormemente dos aspectos, ¿cuáles son?",
       "options": [
-        "La cooperativa cerraba programas solos; la preventiva los mantenía abiertos",
-        "En la cooperativa las apps decidían cuándo ceder el control del procesador; en la preventiva el kernel UNIX gestiona y protege el tiempo de CPU",
-        "La multitarea preventiva solo funcionaba con conexión a Internet",
-        "No había ninguna diferencia técnica entre ambas"
+        "Rendimiento y eficiencia energética",
+        "El precio y el peso físico",
+        "La resolución de pantalla y el volumen",
+        "La compatibilidad con Android y Linux"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Cuál es la base tecnológica y núcleo de código abierto subyacente que impulsa a Mac OS X y a todo el ecosistema de Apple?",
+      "question": "¿En qué dispositivos se pueden utilizar de manera simultánea funciones como AirDrop, iCloud y Handoff?",
       "options": [
-        "Apple DOS",
-        "Darwin (Mach kernel / BSD)",
-        "System 7 Core",
-        "Copland Kernel"
+        "Dispositivos del Ecosistema Apple (Mac, iPhone, iPad, Apple Watch)",
+        "Cualquier computadora de escritorio",
+        "Teléfonos Android y relojes inteligentes genéricos",
+        "Servidores web externos"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿En qué año fue lanzada la computadora Apple Lisa?",
+      "question": "¿Qué característica hace que la gestión de memoria por parte de macOS sea \"prácticamente transparente\"?",
       "options": [
-        "1981",
-        "1983",
-        "1984",
-        "1986"
+        "Porque el usuario no se da cuenta y el sistema lo hace automáticamente",
+        "Porque la pantalla se vuelve traslúcida",
+        "Porque borra los archivos visualmente",
+        "Porque no usa memoria RAM"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Cuántos años abarcó la arquitectura original del Mac OS Clásico (desde System 1 hasta Mac OS 9)?",
+      "question": "La herramienta FileVault de macOS tiene como propósito principal:",
       "options": [
-        "5 años",
-        "10 años",
-        "17 años",
-        "25 años"
+        "Acelerar el internet",
+        "Cifrar los datos almacenados para proteger la información",
+        "Encontrar archivos como Spotlight",
+        "Organizar fotos"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Cuál fue la principal consecuencia técnica y corporativa de la cancelación de Copland en 1996?",
+      "question": "En conclusión, ¿por qué macOS continúa siendo una alternativa importante en el mercado?",
       "options": [
-        "Apple dejó de fabricar computadoras",
-        "Obligó a Apple a buscar un sistema operativo fuera de la empresa, provocando la compra de NeXT y el regreso de Steve Jobs",
-        "Apple adoptó Microsoft Windows para todas sus Mac",
-        "Se decidió continuar utilizando System 7 sin cambios"
+        "Porque es el sistema operativo más económico",
+        "Por la relación y experiencia integrada entre su software y su hardware",
+        "Porque se puede instalar en cualquier computadora",
+        "Porque Apple obliga a usarlo"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué paradigma de interacción de usuario introdujo System 1 en 1984 que sigue vigente en la computación actual?",
+      "question": "¿Qué software principal es considerado el \"intermediario\" entre el usuario y los componentes físicos de una computadora Apple?",
       "options": [
-        "Terminal de comandos en pantalla dividida",
-        "Finder, barra de menú superior persistente, ventanas arrastrables y el paradigma del Escritorio",
-        "Sistema de pestañas y botones 3D",
-        "Control exclusivamente por gestos de ratón sin menú"
+        "Spotlight",
+        "Finder",
+        "macOS",
+        "iCloud"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "Según los datos de la presentación, ¿cuántos dispositivos activos en todo el mundo ejecutan actualmente sistemas derivados del núcleo de Mac OS X?",
+      "question": "Si estás editando un documento en tu Mac y necesitas salir de casa, ¿qué función te permitiría continuar editándolo fácilmente en tu iPad?",
       "options": [
-        "500 millones",
-        "1,000 millones",
-        "Más de 2.2 mil millones",
-        "5 mil millones"
+        "AirDrop",
+        "Handoff",
+        "FileVault",
+        "Spotlight"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué dos componentes físicos fundamentales estaban integrados dentro de la carcasa todo-en-uno del Macintosh de 1984? ---",
+      "question": "Las nuevas versiones de macOS, según la diapositiva 11, continúan incorporando funciones relacionadas principalmente con: ---",
       "options": [
-        "Impresora y escáner",
-        "Monitor CRT y circuitería interna",
-        "Disco duro gigante y teclado",
-        "Fuente de poder externa y lector de casetes"
+        "Publicidad y ventas",
+        "Videojuegos de última generación",
+        "Productividad, seguridad e integración con otros dispositivos",
+        "Antivirus de terceros"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
@@ -450,221 +450,221 @@ export const questions = {
   ],
   "hard": [
     {
-      "question": "¿Qué cita textual se utiliza en la diapositiva 1 para describir el papel del proyecto Apple Lisa frente al Macintosh?",
+      "question": "En términos arquitectónicos, el éxito de la optimización del rendimiento en las computadoras Mac modernas se debe principalmente a:",
       "options": [
-        "\"Lisa fue el fracaso más grande que arruinó la década de los 80.\"",
-        "\"Lisa fue el laboratorio heroico que absorbió el costo del futuro para que el Macintosh pudiera democratizarlo.\"",
-        "\"El Lisa demostró que los comandos de texto nunca pasarían de moda.\"",
-        "\"Sin Lisa, Apple jamás habría construido impresoras.\""
+        "El aumento de memoria RAM de forma ilimitada",
+        "La integración exclusiva y el desarrollo paralelo entre el hardware (ej. Apple Silicon) y el sistema operativo (macOS)",
+        "La eliminación de medidas de seguridad que ralentizan el sistema",
+        "El uso de procesadores de múltiples fabricantes"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué tres pilares técnicos y de diseño resumen la revolución del Macintosh 128K en la diapositiva 2?",
+      "question": "¿Qué característica de diseño de la Macintosh original de 1984 cimentó las bases de la filosofía actual de la interfaz de macOS?",
       "options": [
-        "Teclado extendido, procesador de 32 bits y color",
-        "\"Para el resto de nosotros\" (GUI/cursor), Diseño Todo-en-Uno (CRT/asa) y el Comercial \"1984\" (Ridley Scott)",
-        "Disquetera doble, disco duro interno y módem",
-        "Red local, soporte UNIX y batería portátil"
+        "La implementación comercial de la interfaz gráfica de usuario",
+        "El uso del procesador Apple Silicon M1",
+        "La integración de iCloud Drive",
+        "El cifrado FileVault"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué texto compone exactamente el Manifiesto del Macintosh 128K destacado en la diapositiva 2?",
+      "question": "Si un usuario argumenta que requiere un equipo para \"Videojuegos de última generación y software de ingeniería altamente especializado\", ¿qué sistema operativo es más probable que elija según la presentación?",
       "options": [
-        "\"La tecnología debe ser compleja para garantizar su potencia.\"",
-        "\"La simplicidad no es solo la ausencia de desorden. Es un estado de armonía donde el diseño y la utilidad son inseparables.\"",
-        "\"El diseño es secundario cuando el hardware es suficientemente rápido.\"",
-        "\"Cada computadora debe tener su propio lenguaje de comandos.\""
+        "macOS",
+        "Windows",
+        "iOS",
+        "watchOS"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué tres tecnologías o componentes forman la arquitectura del núcleo de Mac OS X según la ficha técnica de la diapositiva 5?",
+      "question": "El uso de macOS en un estudio de producción musical profesional se ve justificado fundamentalmente por:",
       "options": [
-        "MS-DOS / Windows NT / OS/2",
-        "UNIX / Mach kernel / BSD",
-        "ProDOS / System 7 / Copland",
-        "Linux / Android / WebOS"
+        "La exclusividad de sus puertos USB",
+        "Su facilidad de uso, alta seguridad y estabilidad ininterrumpida",
+        "Su bajo costo de implementación",
+        "Su capacidad de correr juegos de Windows"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué cita textual describe la fusión entre NeXTSTEP y Apple en la diapositiva 5?",
+      "question": "¿Qué funcionalidad del Ecosistema Apple permite una transferencia de datos P2P rápida, local e inalámbrica entre un iPhone y una Mac?",
       "options": [
-        "\"Apple compró NeXT únicamente por las patentes de hardware.\"",
-        "\"NeXTSTEP trajo la arquitectura; Apple trajo el alma y la escala. Juntos crearon el sistema más avanzado del planeta.\"",
-        "\"NeXTSTEP reemplazó por completo la marca Apple en el mercado.\"",
-        "\"La compra de NeXT fue un arreglo temporal de software.\""
+        "Handoff",
+        "iCloud",
+        "FileVault",
+        "AirDrop"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué formato de disquetes utilizaban los sistemas Apple DOS y ProDOS en las computadoras Apple II?",
+      "question": "En la historia de la nomenclatura del sistema, el orden cronológico correcto de los nombres adoptados en el siglo XXI es:",
       "options": [
-        "Disquetes de 3.5 pulgadas",
-        "Disquetes de 5.25 pulgadas",
-        "Discos de 8 pulgadas",
-        "Cartuchos magnéticos"
+        "macOS -> Mac OS X -> OS X",
+        "OS X -> macOS -> Mac OS X",
+        "Mac OS X -> OS X -> macOS",
+        "Mac OS X -> macOS -> OS X"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué sector específico buscaba atender el sistema operativo A/UX de 1988 según el catálogo histórico de la diapositiva 4?",
+      "question": "El control restrictivo de permisos de macOS sobre el acceso al micrófono y cámara por parte de aplicaciones de terceros es una medida directa de:",
       "options": [
-        "Videojuegos domésticos",
-        "Universidades y servidores gubernamentales sobre hardware de alto costo",
-        "Diseño gráfico básico para niños",
-        "Estaciones de radio am"
+        "Rendimiento y eficiencia energética",
+        "Seguridad y privacidad del usuario",
+        "Integración del Ecosistema",
+        "Optimización gráfica"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿En qué año fundó Steve Jobs la empresa NeXT tras haber sido apartado de sus funciones en Apple?",
+      "question": "¿Qué componente de la Interfaz Gráfica de macOS es el equivalente principal al \"Explorador de Archivos\" de Windows para navegar la jerarquía de carpetas?",
       "options": [
-        "1983",
-        "1985",
-        "1989",
-        "1993"
+        "Spotlight",
+        "Dock",
+        "Finder",
+        "FileVault"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué dos características clave definieron al sistema Mac OS X en su lanzamiento de marzo de 2001 (Paso 02 en la diapositiva 5)?",
+      "question": "¿Cuál es la función tecnológica detrás de \"Handoff\"?",
       "options": [
-        "Interfaz de línea de comandos y ausencia de gráficos",
-        "Interfaz Aqua intuitiva combinada con un núcleo UNIX con memoria protegida y multitarea real",
-        "Compatibilidad exclusiva con discos de 5.25 pulgadas",
-        "Eliminación del Finder y de la barra de menú superior"
+        "Cifrar el disco duro",
+        "Traspasar el estado y progreso de una aplicación activa de un dispositivo Apple a otro cercano",
+        "Buscar archivos en toda la computadora mediante indexación rápida",
+        "Respaldar fotografías en la nube"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué conclusión histórica se expone al cierre de la presentación en la diapositiva 6?",
+      "question": "¿Qué beneficio térmico y operativo trajo la transición a los chips Apple Silicon iniciada en 2020?",
       "options": [
-        "\"El Macintosh fue superado y olvidado por las computadoras modernas.\"",
-        "\"La visión de 1984 de una computadora personal intuitiva no murió con el hardware beige: vive en cada pantalla y experiencia espacial que utilizamos en el siglo XXI.\"",
-        "\"Las pantallas táctiles terminaron definitivamente con el legado del Mac.\"",
-        "\"El futuro de la informática es regresar a las líneas de comando.\""
+        "Las Mac comenzaron a requerir sistemas de enfriamiento líquido masivos",
+        "Mejora drástica en el rendimiento combinada con una alta eficiencia energética",
+        "Mayor compatibilidad nativa con procesadores Intel",
+        "Reducción en la seguridad del sistema operativo"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué diferencia de interfaz existía entre el Apple II (1977) y el Apple Lisa (1983) descrita en la diapositiva 1?",
+      "question": "Desde el punto de vista del mercado, la presentación concluye que la mayor ventaja competitiva de macOS respecto a Windows radica en:",
       "options": [
-        "El Apple II usaba pantalla a color y el Lisa era monocromático",
-        "El Apple II funcionaba con líneas de comando de texto; el Lisa introdujo la primera Interfaz Gráfica de Usuario (GUI) con mouse",
-        "El Apple II no tenía teclado y el Lisa sí",
-        "Ninguna, ambos usaban exactamente la misma interfaz de usuario"
+        "La capacidad de vender licencias a otros fabricantes",
+        "La experiencia integrada inigualable al dominar tanto el hardware como el software",
+        "El catálogo infinito de videojuegos de PC",
+        "Los precios accesibles para estudiantes"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué caracterizaba a los sistemas operativos antes de la llegada de la computación gráfica personal descritos en la editorial de la diapositiva 1?",
+      "question": "Spotlight en macOS se describe en la presentación como una herramienta para:",
       "options": [
-        "Interfaces táctiles de fósforo azul",
-        "Máquinas complejas con líneas de comando, pantallas monocromáticas oscuras y texto en fósforo verde o blanco",
-        "Gráficos tridimensionales renderizados en tiempo real",
-        "Comandos de voz en pantallas gigantes"
+        "Modificar la estructura del hardware",
+        "Encontrar rápidamente documentos, aplicaciones y otra información almacenada",
+        "Sincronizar datos con servidores externos",
+        "Conectar los AirPods"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué problemas específicos provocaron la cancelación del proyecto Copland en 1996 según la diapositiva 4?",
+      "question": "Al conectar un dispositivo externo (como un USB) a una Mac, macOS interviene:",
       "options": [
-        "Retrasos masivos, incompatibilidades graves y la dificultad de reconstruir Mac OS con microkernel desde cero",
-        "Falta de presupuesto económico en la empresa",
-        "Ningún desarrollador quiso programar para el sistema",
-        "El procesador Motorola dejó de fabricarse"
+        "Apagando la pantalla por seguridad",
+        "Administrando los recursos necesarios para que funcione transparentemente",
+        "Borrando la memoria del equipo temporalmente",
+        "Pidiendo al usuario que escriba líneas de código"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué dispositivos integran el ecosistema derivado del núcleo de Mac OS X según el árbol genealógico de la diapositiva 6?",
+      "question": "¿Qué impacto tuvo en el mercado la adopción formal del nombre \"macOS\" en 2016?",
       "options": [
-        "iPhone (iOS), iPad (iPadOS), Apple Watch (watchOS), Apple TV (tvOS) y Apple Vision Pro (visionOS)",
-        "Únicamente computadoras de escritorio Mac Pro",
-        "Servidores A/UX y computadoras NeXT Cube",
-        "Dispositivos Apple II y Apple III"
+        "Unificó la nomenclatura del ecosistema operativo de Apple (macOS, iOS, watchOS, tvOS)",
+        "Marcó el fin de las computadoras Mac",
+        "Fue el año en que Apple dejó de usar procesadores Intel",
+        "Introdujo el cifrado FileVault por primera vez"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué función específica cumplen watchOS y tvOS en el ecosistema según la diapositiva 6?",
+      "question": "¿Qué tipo de cifrado realiza FileVault en macOS?",
       "options": [
-        "Reemplazar al sistema operativo del Mac en oficinas",
-        "Microsistemas de tiempo real adaptados para sensores biométricos en la muñeca y entretenimiento en el hogar",
-        "Servir como editores de código de comandos",
-        "Controlar la fabricación de hardware en plantas industriales"
+        "Cifra únicamente las comunicaciones de Safari",
+        "Cifra los datos almacenados en el disco completo de la computadora",
+        "Cifra las contraseñas de iCloud solamente",
+        "Cifra los archivos enviados por AirDrop"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué innovación de interacción aporta iPadOS desde 2019 dentro de la familia de sistemas de Apple?",
+      "question": "La sincronización de información entre un iPad y una Mac en tiempo real sin requerir transferencias manuales se logra gracias a:",
       "options": [
-        "Eliminación de aplicaciones de terceros",
-        "Optimización para productividad modular, lápiz óptico y pantallas táctiles de gran formato",
-        "Regreso a las líneas de comando monocromáticas",
-        "Control mediante teclado físico obligatorio sin soporte táctil"
+        "Handoff",
+        "AirDrop",
+        "iCloud",
+        "Spotlight"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué nombre recibía originalmente la serie de software del Mac entre 1984 y 1997 antes de llamarse oficialmente \"Mac OS\"?",
+      "question": "Si macOS controla elementos como los procesos del equipo de manera \"prácticamente transparente\", ¿a qué se refiere el término \"procesos\"?",
       "options": [
-        "Apple OS",
-        "System Software (System 1 al 7)",
-        "Lisa OS",
-        "Darwin OS"
+        "A las tareas computacionales en ejecución en segundo plano y primer plano",
+        "A los pagos realizados con tarjeta de crédito",
+        "Al calentamiento de la batería",
+        "A las actualizaciones de software de Windows"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿En qué año se lanzó Mac OS 8, marcando la adopción formal del nombre \"Mac OS\"?",
+      "question": "¿Cuál es un uso donde un usuario profesional podría preferir una computadora con Windows sobre una con macOS según las desventajas presentadas?",
       "options": [
-        "1984",
-        "1991",
-        "1997",
-        "2001"
+        "Para edición de video con Final Cut",
+        "Para usar software especializado que solo se programa para hardware genérico o Windows",
+        "Para sincronizar información con su Apple Watch",
+        "Para tener una interfaz más segura contra virus"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué característica técnica de visionOS permite optimizar el procesamiento gráfico al reducir el consumo en la visión periférica del usuario?",
+      "question": "¿Qué elementos de diseño garantizan una experiencia \"sencilla\" en la interacción diaria con macOS?",
       "options": [
-        "Pantalla de fósforo verde",
-        "Renderizado foveado combinado con rastreo ocular",
-        "Multitarea cooperativa",
-        "Desactivación de sombras en 2D"
+        "La necesidad constante de compilar código fuente",
+        "El diseño intuitivo de su Escritorio, Dock y Barra de Menús",
+        "Las alertas constantes de seguridad",
+        "La limitación de hardware a un solo monitor"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
     },
     {
-      "question": "¿Qué dos etapas o pasos estructuran la transición histórica de NeXT a Mac OS X descrita en la diapositiva 5? ---",
+      "question": "En resumen, ¿cuál es la esencia fundamental de macOS revelada en la conclusión de la presentación? ---",
       "options": [
-        "Paso 01: Adquisición de NeXT (NeXTSTEP, 1996); Paso 02: Lanzamiento de Mac OS X con interfaz Aqua y núcleo UNIX (2001)",
-        "Paso 01: Creación de A/UX; Paso 02: Cancelación de Copland",
-        "Paso 01: Lanzamiento de Lisa; Paso 02: Lanzamiento del iPhone",
-        "Paso 01: Lanzamiento de System 1; Paso 02: Lanzamiento de Mac OS 9"
+        "Es un sistema operativo abierto que cualquier fabricante puede usar",
+        "Es un sistema que combina interfaz sencilla, seguridad, rendimiento e integración total con el ecosistema de hardware de Apple",
+        "Es una herramienta exclusiva para editar video, inútil para tareas cotidianas",
+        "Es una versión modificada de Windows con un logotipo diferente"
       ],
       "correctIndex": 0,
       "category": "Historia Mac"
