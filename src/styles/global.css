@@ -1160,3 +1160,26 @@ svg * {
   box-shadow: var(--shadow-glow-purple);
   transform: scale(1.1);
 }
+
+/* ============================================
+   RESPONSIVE DESIGN (MOBILE)
+   ============================================ */
+@media (max-width: 768px) {
+  .answers-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+  
+  .answer-btn {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.9rem;
+  }
+  
+  .battle-area {
+    padding: 0 var(--space-sm);
+  }
+  
+  .hud-top {
+    padding: var(--space-md) var(--space-sm);
+  }
+}
