@@ -27,8 +27,19 @@ const { title, description = "Mac Quest — Demuestra tu conocimiento del ecosis
     <div class="starfield" id="starfield"></div>
     <div class="mountains"></div>
 
-    <!-- Sound Toggle -->
-    <button class="sound-toggle" id="sound-toggle" title="Alternar sonido">🔊</button>
+    <!-- Sound Toggle Switch -->
+    <div class="sound-toggle-container" title="Activar / Apagar música y sonido">
+      <span class="sound-toggle-label">🎵 Música</span>
+      <label class="sound-switch" for="sound-toggle" title="Alternar música">
+        <input type="checkbox" id="sound-toggle" checked aria-label="Alternar música y sonido" />
+        <span class="switch-slider">
+          <span class="switch-thumb">
+            <span class="thumb-icon icon-on">🔊</span>
+            <span class="thumb-icon icon-off">🔇</span>
+          </span>
+        </span>
+      </label>
+    </div>
 
     <slot />
   </body>

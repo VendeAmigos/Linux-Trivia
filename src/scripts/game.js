@@ -334,14 +334,12 @@ function setupEventListeners() {
     Sounds.playBGM('title');
   });
 
-  // Sound toggle
+  // Sound toggle switch
   if (soundToggle) {
-    soundToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      state.soundEnabled = !state.soundEnabled;
+    soundToggle.checked = state.soundEnabled;
+    soundToggle.addEventListener('change', () => {
+      state.soundEnabled = soundToggle.checked;
       Sounds.setSoundEnabled(state.soundEnabled);
-      soundToggle.textContent = state.soundEnabled ? '🔊' : '🔇';
     });
   }
 }
